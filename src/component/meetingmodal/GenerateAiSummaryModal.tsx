@@ -1,0 +1,63 @@
+import Link from 'next/link'
+import React from 'react'
+
+const GenerateAiSummaryModal = () => {
+  return (
+    <>
+        <div className="modal fade" id="aiSummaryModal" tabIndex={-1} aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered onyba-ai-dialog">
+            <div className="modal-content onyba-ai-content">
+                
+                <button type="button" className="onyba-ai-close-cross" data-bs-dismiss="modal" aria-label="Close">
+                    <img src="images/close-btn-popup.svg" alt="&times;"/>
+                </button>
+
+                <div className="modal-body onyba-ai-body">
+                    
+                    <div className="onyba-ai-loader-container">
+                        <div className="onyba-ai-spinner-dot"></div>
+                        <div className="onyba-ai-spinner-dot"></div>
+                        <div className="onyba-ai-spinner-dot"></div>
+                        <div className="onyba-ai-spinner-dot"></div>
+                        <div className="onyba-ai-spinner-dot"></div>
+                        <div className="onyba-ai-spinner-dot"></div>
+                        <div className="onyba-ai-spinner-dot"></div>
+                        <div className="onyba-ai-spinner-dot"></div>
+                    </div>
+
+                    <h5 className="onyba-ai-title">Generating AI Summary...</h5>
+                    
+                    <p className="onyba-ai-desc">Preparing session details...</p>
+
+                    <div className="onyba-ai-status-panel">
+                        
+                        <div className="onyba-ai-status-row onyba-ai-state-done">
+                            <p>Saving recording</p>
+                            <span className="onyba-ai-icon-check"><img src="images/check-icon-popup.svg" alt=""/></span>
+                        </div>
+
+                        <div className="onyba-ai-status-row onyba-ai-state-loading">
+                            <p>Generating AI summary</p>
+                            <span className="onyba-ai-icon-spin"></span>
+                        </div>
+
+                        <div className="onyba-ai-status-row onyba-ai-state-loading">
+                            <p>Preparing notes</p>
+                            <span className="onyba-ai-icon-spin"></span>
+                        </div>
+
+                    </div>
+
+                    <Link href="/back-to-agenda" className="onyba-ai-btn-skip" data-bs-modal="dismiss">Skip</Link>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+    </>
+  )
+}
+
+export default GenerateAiSummaryModal
