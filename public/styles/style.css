@@ -7558,6 +7558,13 @@ background: linear-gradient(180deg, #93996D 0%, #52553E 100%);
     transition: all 0.2s;
 }
 
+.onyba-avail-date--today {
+  background: #f0f1ee;
+  border: 2px solid #93996D;
+  color: #333333;
+  font-weight: 600;
+}
+
 .onyba-avail-date-cell:hover:not(.onyba-avail-date-empty) {
     background-color: #f0f1ee;
 }
@@ -7618,6 +7625,10 @@ background: linear-gradient(180deg, #93996D 0%, #52553E 100%);
     color: #444;
     outline: none;
     background-color: #ffffff;
+
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 .onyba-avail-clock-icon {
