@@ -1,5 +1,6 @@
 import CancelSessionPopup from '@/src/component/CancelSessionPopup'
 import React from 'react'
+import agendaData from '@/src/data/backToAgendaData.json'
 
 const BackToAgenda = () => {
     return (
@@ -39,13 +40,13 @@ const BackToAgenda = () => {
 
                         <div className="dbt-pcard-section dbt-pcard-profile">
                             <div className="dbt-pcard-avatar-wrapper">
-                                <img src="/images/patientes-profile.svg" alt="John Doe Rodriguez" className="dbt-pcard-avatar-img" />
+                                <img src={agendaData.patientInfo.avatar} alt={agendaData.patientInfo.name} className="dbt-pcard-avatar-img" />
                             </div>
                             <div className="dbt-pcard-meta-main">
-                                <h2 className="dbt-pcard-name">John Carter <a href="#"><img src="images/right-icon.svg" alt="" /></a></h2>
-                                <p className="dbt-pcard-age-gender">Age 15 <span className="dbt-pcard-bullet">•</span> Male</p>
+                                <h2 className="dbt-pcard-name">{agendaData.patientInfo.name} <a href="#"><img src="images/right-icon.svg" alt="" /></a></h2>
+                                <p className="dbt-pcard-age-gender">Age {agendaData.patientInfo.age} <span className="dbt-pcard-bullet">•</span> {agendaData.patientInfo.gender}</p>
                                 <div className="dbt-pcard-ids">
-                                    <p>Patient ID: <span>PT-1245</span></p>
+                                    <p>Patient ID: <span>{agendaData.patientInfo.patientId}</span></p>
                                     {/* <!-- <p>DIN No.: <span>85486478</span></p>
                 <p>D.O.B: <span>15 May 2011</span></p> --> */}
                                 </div>
@@ -53,10 +54,10 @@ const BackToAgenda = () => {
                         </div>
 
                         <div className="dbt-pcard-section dbt-pcard-details">
-                            <div className="dbt-pcard-info-row">Phone No.-: +1 (555) 123-4567</div>
-                            <div className="dbt-pcard-info-row">Occupation -: <span>Student</span></div>
-                            <div className="dbt-pcard-info-row">Marital Status -: <span>Single</span></div>
-                            <div className="dbt-pcard-info-row">Insurance -: <span>12/1234567890/12</span></div>
+                            <div className="dbt-pcard-info-row">Phone No.-: {agendaData.patientInfo.phone}</div>
+                            <div className="dbt-pcard-info-row">Occupation -: <span>{agendaData.patientInfo.occupation}</span></div>
+                            <div className="dbt-pcard-info-row">Marital Status -: <span>{agendaData.patientInfo.maritalStatus}</span></div>
+                            <div className="dbt-pcard-info-row">Insurance -: <span>{agendaData.patientInfo.insurance}</span></div>
                         </div>
 
                         {/* <!-- <div className="dbt-pcard-section dbt-pcard-session-next">
@@ -66,9 +67,9 @@ const BackToAgenda = () => {
     </div> --> */}
 
                         <div className="dbt-pcard-section dbt-pcard-session-last">
-                            <div className="dbt-pcard-info-row">Session Mode -: <a href="#" className="session-mode"><span></span>Online</a></div>
-                            <div className="dbt-pcard-info-row">Last Session -: <span>May 20, 2026</span></div>
-                            <div className="dbt-pcard-info-row">Insurance No.-: <span>12/1234567890/12</span></div>
+                            <div className="dbt-pcard-info-row">Session Mode -: <a href="#" className="session-mode"><span></span>{agendaData.patientInfo.sessionMode}</a></div>
+                            <div className="dbt-pcard-info-row">Last Session -: <span>{agendaData.patientInfo.lastSession}</span></div>
+                            <div className="dbt-pcard-info-row">Insurance No.-: <span>{agendaData.patientInfo.insurance}</span></div>
                         </div>
 
                     </div>
@@ -88,14 +89,16 @@ const BackToAgenda = () => {
                             <label className="service-input-label">Service Name*</label>
 
                             <div className="service-tags-wrapper">
-                                <div className="service-selected-tag">
-                                    <span className="service-tag-text">1st Adult Session</span>
-                                    <button type="button" className="service-tag-remove-btn" aria-label="Remove service">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
-                                        </svg>
-                                    </button>
-                                </div>
+                                {agendaData.services.map(service => (
+                                    <div className="service-selected-tag" key={service.id}>
+                                        <span className="service-tag-text">{service.name}</span>
+                                        <button type="button" className="service-tag-remove-btn" aria-label="Remove service">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                ))}
                             </div>
                         </div>
 
@@ -133,72 +136,20 @@ const BackToAgenda = () => {
           </div>
 
           <div className="ps-sessions-inner-box">
-            
-            <div className="ps-sessions-list-item">
-              <div className="ps-sessions-col-name">
-                <span className="ps-sessions-dot"></span> Session 1
-              </div>
-              <div className="ps-sessions-col-date">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                May 20, 2026
-              </div>
-              <div className="ps-sessions-col-details">
-                <span className="ps-sessions-muted-prefix">Session Details -:</span> Anxiety & work stress
-              </div>
-            </div>
-
-            <div className="ps-sessions-list-item">
-              <div className="ps-sessions-col-name">
-                <span className="ps-sessions-dot"></span> Session 2
-              </div>
-              <div className="ps-sessions-col-date">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                May 22, 2026
-              </div>
-              <div className="ps-sessions-col-details">
-                <span className="ps-sessions-muted-prefix">Session Details -:</span> Anxiety & work stress
-              </div>
-            </div>
-
-            <div className="ps-sessions-list-item">
-              <div className="ps-sessions-col-name">
-                <span className="ps-sessions-dot"></span> Session 3
-              </div>
-              <div className="ps-sessions-col-date">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                May 24, 2026
-              </div>
-              <div className="ps-sessions-col-details">
-                <span className="ps-sessions-muted-prefix">Session Details -:</span> Anxiety & work stress
-              </div>
-            </div>
-
-            <div className="ps-sessions-list-item">
-              <div className="ps-sessions-col-name">
-                <span className="ps-sessions-dot"></span> Session 4
-              </div>
-              <div className="ps-sessions-col-date">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                May 26, 2026
-              </div>
-              <div className="ps-sessions-col-details">
-                <span className="ps-sessions-muted-prefix">Session Details -:</span> Anxiety & work stress
-              </div>
-            </div>
-
-            <div className="ps-sessions-list-item">
-              <div className="ps-sessions-col-name">
-                <span className="ps-sessions-dot"></span> Session 5
-              </div>
-              <div className="ps-sessions-col-date">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                May 30, 2026
-              </div>
-              <div className="ps-sessions-col-details">
-                <span className="ps-sessions-muted-prefix">Session Details -:</span> Depression
-              </div>
-            </div>
-
+            {agendaData.previousSessions.map(session => (
+                <div className="ps-sessions-list-item" key={session.id}>
+                  <div className="ps-sessions-col-name">
+                    <span className="ps-sessions-dot"></span> {session.name}
+                  </div>
+                  <div className="ps-sessions-col-date">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    {session.date}
+                  </div>
+                  <div className="ps-sessions-col-details">
+                    <span className="ps-sessions-muted-prefix">Session Details -:</span> {session.details}
+                  </div>
+                </div>
+            ))}
           </div>
 
         </div>
@@ -225,19 +176,19 @@ const BackToAgenda = () => {
 
                             <div className="financial-info-row">
                                 <span className="financial-row-label">Session Type Price</span>
-                                <span className="financial-row-value">$80.00 (Paid)</span>
+                                <span className="financial-row-value">{agendaData.financialDetails.sessionTypePrice}</span>
                             </div>
 
                             <div className="financial-info-row">
                                 <span className="financial-row-label">Payment Method</span>
-                                <span className="financial-row-value">Paypal</span>
+                                <span className="financial-row-value">{agendaData.financialDetails.paymentMethod}</span>
                             </div>
 
                             <div className="financial-info-row financial-row-align-top">
                                 <span className="financial-row-label">Service Added</span>
                                 <div className="financial-row-value-group">
-                                    <span className="financial-row-value">+$50.00</span>
-                                    <span className="financial-row-subtext">-1st Free Adult Session</span>
+                                    <span className="financial-row-value">{agendaData.financialDetails.serviceAdded.amount}</span>
+                                    <span className="financial-row-subtext">{agendaData.financialDetails.serviceAdded.subtext}</span>
                                 </div>
                             </div>
 
@@ -254,7 +205,7 @@ const BackToAgenda = () => {
                                 </div>
                                 <h2>Collect Payment</h2>
                             </div>
-                            <div className="cp-remaining-badge">Remaining: $30</div>
+                            <div className="cp-remaining-badge">Remaining: {agendaData.collectPayment.remaining}</div>
                         </div>
 
                         <hr className="cp-divider" />
@@ -263,7 +214,7 @@ const BackToAgenda = () => {
 
                             <div className="cp-total-row">
                                 <span className="cp-total-label">Total Session Amount</span>
-                                <span className="cp-total-val">$150</span>
+                                <span className="cp-total-val">{agendaData.collectPayment.totalSessionAmount}</span>
                             </div>
 
                             <div className="cp-grid">

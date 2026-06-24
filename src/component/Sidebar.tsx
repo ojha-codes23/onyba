@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import React from 'react'
 import Logout from './Logout'
 
@@ -25,6 +25,7 @@ const navItems = [
 
 const Sidebar = () => {
 
+  const router = useRouter()
   const pathname = usePathname()
   const hideSidebar = pathname.includes("/video-confrenece")
 
@@ -35,7 +36,7 @@ const Sidebar = () => {
       <aside className="gl-sidebar">
 
         {/* Brand Block */}
-        <div className="gl-brand-block">
+        <div className="gl-brand-block" onClick={() => router.push("/dashboard")}>
           {/* Adjusted to absolute paths assuming they live in /public/images/ */}
           <img src="/images/inner-logo.svg" alt="GrantLink NC" className="gl-logo-full" />
           <img src="/images/inner-logo.svg" alt="GL" className="gl-logo-collapsed" />

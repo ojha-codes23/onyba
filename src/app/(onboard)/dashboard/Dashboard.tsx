@@ -1,3 +1,7 @@
+"use client";
+
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const dashboardStats = [
@@ -9,7 +13,7 @@ const dashboardStats = [
     iconTextClass: "",
     iconSrc: "/images/dash-appointments.svg",
     actionText: "View all appointments",
-    link: "#"
+    link: "/agenda"
   },
   {
     label: "Pending Notes",
@@ -29,7 +33,7 @@ const dashboardStats = [
     iconTextClass: "",
     iconSrc: "/images/dash-total-earning.svg",
     actionText: "View all",
-    link: "#"
+    link: "/earning"
   },
   {
     label: "Net Earning",
@@ -39,7 +43,7 @@ const dashboardStats = [
     iconTextClass: "",
     iconSrc: "/images/dashg-net-earning.svg",
     actionText: "View all",
-    link: "#"
+    link: "/earning"
   }
 ];
 
@@ -54,6 +58,7 @@ const upcomingSessions = [
     statusBadgeClass: "dbt-badge-online",
     actionButtonText: "Start Session",
     actionButtonClass: "dbt-btn-filled"
+
   },
   {
     name: "Emma Watson",
@@ -193,6 +198,19 @@ const recentPayments = [
 ];
 
 const Dashboard = () => {
+  const router = useRouter()
+
+  const handleClickSubmit = (session: any) => {
+
+    if (session?.actionButtonText === "Start Session") {
+      router.push("/video-confrenece")
+    }
+    else {
+      router.push("/agenda")
+    }
+  }
+
+
   return (
     <>
       <main className="gl-content-body">
@@ -225,9 +243,9 @@ const Dashboard = () => {
                   </span>
                   <h2 className="dbt-heading-text">Upcoming Sessions</h2>
                 </div>
-                <a href="#" className="dbt-view-all-link">
+                <Link href="/agenda" className="dbt-view-all-link">
                   View all <span className="dbt-arrow">&gt;</span>
-                </a>
+                </Link>
               </div>
 
               <table className="dbt-data-table">
@@ -251,7 +269,7 @@ const Dashboard = () => {
                         <span className={`dbt-badge ${session.statusBadgeClass}`}>● {session.statusText}</span>
                       </td>
                       <td className="dbt-col-action">
-                        <button className={session.actionButtonClass}>{session.actionButtonText}</button>
+                        <button className={session.actionButtonClass} onClick={() => handleClickSubmit(session)}>{session.actionButtonText}</button>
                       </td>
                     </tr>
                   ))}
@@ -287,7 +305,7 @@ const Dashboard = () => {
                             <span className="dbt-due-countdown">{note.dueIn}</span>
                           </td>
                           <td style={{ width: "25%", textAlign: "right" }}>
-                            <button className="dbt-btn-maroon">Create Notes</button>
+                            <button className="dbt-btn-maroon" onClick={() => router.push("back-to-calendar")}>Create Notes</button>
                           </td>
                         </tr>
                       </tbody>
@@ -316,9 +334,9 @@ const Dashboard = () => {
                     Reserved Slots <span className="dbt3-sub-heading-text">(Awaiting Payment)</span>
                   </h2>
                 </div>
-                <a href="#" className="dbt-view-all-link">
+                <Link href="/agenda" className="dbt-view-all-link">
                   View all <span className="dbt-arrow">&gt;</span>
-                </a>
+                </Link>
               </div>
 
               <table className="dbt-data-table">
@@ -343,7 +361,7 @@ const Dashboard = () => {
                         <span className={slot.expiresClass}>{slot.expiresIn}</span>
                       </td>
                       <td className="dbt-col-action">
-                        <button className="dbt-btn-outlined">View Details</button>
+                        <button className="dbt-btn-outlined" onClick={() => router.push("/agenda")}>View Details</button>
                       </td>
                     </tr>
                   ))}
@@ -361,9 +379,9 @@ const Dashboard = () => {
                     Recent Payments <span className="dbt3-sub-heading-text">(Last 5)</span>
                   </h2>
                 </div>
-                <a href="#" className="dbt-view-all-link">
+                <Link href="/earning" className="dbt-view-all-link">
                   View all <span className="dbt-arrow">&gt;</span>
-                </a>
+                </Link>
               </div>
 
               <table className="dbt-data-table">

@@ -234,10 +234,10 @@ const EarningReport = () => {
                         </div>
 
 
-                        <Pagination 
-                            currentPage={validLedgerPage} 
-                            totalPages={ledgerTotalPages} 
-                            onPageChange={(p) => setLedgerPage(p)} 
+                        <Pagination
+                            currentPage={validLedgerPage}
+                            totalPages={ledgerTotalPages}
+                            onPageChange={(p) => setLedgerPage(p)}
                         />
 
 
@@ -327,10 +327,10 @@ const EarningReport = () => {
                             </table>
                         </div>
 
-                        <Pagination 
-                            currentPage={validRemunPage} 
-                            totalPages={remunTotalPages} 
-                            onPageChange={(p) => setRemunPage(p)} 
+                        <Pagination
+                            currentPage={validRemunPage}
+                            totalPages={remunTotalPages}
+                            onPageChange={(p) => setRemunPage(p)}
                         />
                     </div>
                 </div>
