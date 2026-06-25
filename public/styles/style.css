@@ -379,6 +379,19 @@ select:-webkit-autofill {
   transition: all 0.2s;
 }
 
+.onyba-avail-date--today {
+  background: #f0f1ee;
+  border: 2px solid #93996D;
+  color: #333333;
+  font-weight: 600;
+}
+
+.onyba-avail-date--selected {
+  background: linear-gradient(180deg, #93996D 0%, #52553E 100%);
+  color: #ffffff !important;
+  font-weight: 600;
+}
+
 .therapist-profile-container .tp-toggle-pill:hover {
   opacity: 0.9;
 }
@@ -7859,6 +7872,10 @@ div#accordionExample .accordion-item {
   color: #444;
   outline: none;
   background-color: #ffffff;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .onyba-avail-clock-icon {

@@ -383,7 +383,7 @@ const PersonalProfile = () => {
 
                             <div className="onyba-prof-admin-bar">
                                 <span>Email Address</span>
-                                <span className="onyba-prof-admin-email-pill">admin@onyba.com</span>
+                                <a href="mailto:admin@onyba.com" className="onyba-prof-admin-email-pill">admin@onyba.com</a>
                             </div>
                         </div> </div>
                 </div>

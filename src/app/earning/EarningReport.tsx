@@ -3,6 +3,9 @@ import React, { useState } from 'react'
 import earningData from '@/src/data/earningData.json'
 import Pagination from '@/src/component/common/Pagintion'
 import DateRangePicker from '@/src/component/DateRangePicker'
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+import Link from "next/link";
 
 const EarningReport = () => {
     const [searchQuery, setSearchQuery] = useState("");
@@ -42,6 +45,52 @@ const EarningReport = () => {
     const validRemunPage = Math.min(remunPage, remunTotalPages);
     const paginatedRemun = earningData.previousRemuneration.slice((validRemunPage - 1) * ITEMS_PER_PAGE, validRemunPage * ITEMS_PER_PAGE);
 
+    const handleExportPDF = () => {
+        const doc = new jsPDF();
+
+        doc.setFontSize(16);
+        doc.text("Session Payment Ledger Report", 14, 15);
+
+        const tableColumn = [
+            "History No.",
+            "Patient Name",
+            "Session Type",
+            "Date & Time",
+            "Session Mode",
+            "Amount",
+            "Patient Paid",
+            "Payment Type",
+            "Status"
+        ];
+
+        const tableRows = filteredLedger.map((session) => [
+            session.historyNo,
+            session.patientName,
+            session.sessionType,
+            `${session.date} ${session.time}`,
+            session.mode,
+            session.amount,
+            session.patientPaid,
+            session.paymentType,
+            session.status,
+        ]);
+
+        autoTable(doc, {
+            head: [tableColumn],
+            body: tableRows,
+            startY: 25,
+            styles: {
+                fontSize: 8,
+            },
+            headStyles: {
+                fillColor: [128, 0, 0], // maroon
+            },
+        });
+
+        doc.save("session-payment-ledger.pdf");
+    };
+
+
     return (
         <>
             <main className="gl-content-body">
@@ -77,7 +126,7 @@ const EarningReport = () => {
                                     <span className="db-card-label-text">Sessions This Month</span>
                                     <span className="db-card-main-value db-color-olive-dark">{earningData.metrics.sessionsThisMonth.value}</span>
                                 </div>
-                                <div className="db-card-icon-badge db-bg-olive-net"><img src="images/fluent-className--regular.svg" alt="" /></div>
+                                <div className="db-card-icon-badge db-bg-olive-net"><img src="images/fluent-class--regular.svg" alt="" /></div>
                             </div>
                             <a href="#" className="db-card-action-link">{earningData.metrics.sessionsThisMonth.subtext}</a>
                         </div>
@@ -119,7 +168,13 @@ const EarningReport = () => {
                                 </div>
                                 <h2 className="mbs-main-heading">Session payment ledger</h2>
                             </div>
-                            <button type="button" className="mbs-action-btn">Export</button>
+                            <button
+                                type="button"
+                                className="mbs-action-btn"
+                                onClick={handleExportPDF}
+                            >
+                                Export
+                            </button>
                         </div>
 
                         <div className="dbt4-filter-bar mt-4">
@@ -235,8 +290,13 @@ const EarningReport = () => {
                                             <td>{session.patientPaid}</td>
                                             <td className="dbt4-regular-cell">{session.paymentType}</td>
                                             <td><span className={`status ${session.status.toLowerCase().replace(' ', '-')}`}>{session.status}</span></td>
-                                            <td><a href="#" className="earnig-view-btn">View Details</a></td>
-                                            <td><a href="#" className="earnig-view-btn">View</a></td>
+                                            <td><Link href="/patient-profile" className="earnig-view-btn">View Details</Link></td>
+                                            <td>
+                                                <a href="/invoices/dummy-invoice.pdf"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="earnig-view-btn">View</a>
+                                            </td>
                                         </tr>
                                     ))}
 
@@ -331,7 +391,13 @@ const EarningReport = () => {
                                             <td>{remun.bonus}</td>
                                             <td>{remun.date}</td>
                                             <td><span className={`status ${remun.status.toLowerCase().replace(' ', '-')}`}>{remun.status}</span></td>
-                                            <td><a href="#" className="earnig-view-btn">View</a></td>
+                                            <td>
+                                                <a href="/invoices/dummy-invoice.pdf"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="earnig-view-btn">View</a>
+                                            </td>
+                                            {/* <td><a href="#" className="earnig-view-btn">View</a></td> */}
                                         </tr>
                                     ))}
                                 </tbody>
