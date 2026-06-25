@@ -23,7 +23,7 @@ const dashboardStats = [
     iconTextClass: "db-text-alert-red-bold",
     iconSrc: "/images/dash-pending-notes.svg",
     actionText: "Go to notes",
-    link: "#"
+    link: "/final-back-to-agenda"
   },
   {
     label: "Total Earning",

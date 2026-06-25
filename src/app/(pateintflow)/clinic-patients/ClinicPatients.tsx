@@ -5,6 +5,7 @@ import clinicPatients from '../../../data/clinicPatients.json'
 import Pagination from '@/src/component/common/Pagintion';
 import Link from 'next/link';
 import AgendaCalendarPopup from '@/src/component/AgendaCalendarPopup';
+import DateRangePicker from '@/src/component/DateRangePicker';
 
 const ClinicPatients = () => {
 
@@ -44,7 +45,18 @@ const ClinicPatients = () => {
                             <input type="text" value={search} onChange={(e) => searchPatients(e.target.value)} placeholder="Search" className="dbt4-search-input" />
                         </div>
                         <div className="dbt4-right-filters">
-                            <button className="dbt4-filter-dropdown" data-bs-toggle="modal" data-bs-target="#exampleModal">Date Range <span className="dbt4-cal-icon"><img src="/images/date-icon.svg" alt="" /></span></button>
+
+                            <DateRangePicker
+                                onChange={(range) => {
+                                    console.log("Selected Start Date:", range.startDate);
+                                    console.log("Selected End Date:", range.endDate);
+                                }}
+                            >
+                                <button className="dbt4-filter-dropdown" type="button">
+                                    Date Range <span className="dbt4-cal-icon"><img src="/images/date-icon.svg" alt="" /></span>
+                                </button>
+                            </DateRangePicker>
+                            {/* <button className="dbt4-filter-dropdown" >Date Range <span className="dbt4-cal-icon"><img src="/images/date-icon.svg" alt="" /></span></button> */}
                             <div className="dropdown dbt4-bs-dropdown-wrapper">
                                 <button className="dbt4-filter-dropdown dropdown-toggle dbt4-remove-arrow" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Status <span className="dbt4-arrow-icon"><img src="/images/dropdown-icon.svg" alt="" /></span>

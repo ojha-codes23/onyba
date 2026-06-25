@@ -37,7 +37,7 @@ const notifications = [
 
 const Header = () => {
     const pathname = usePathname()
-    const route = useRouter()
+    const router = useRouter()
     const [isNotiOpen, setIsNotiOpen] = useState(false);
     const [activeTab, setActiveTab] = useState<"All" | "Unread">("All");
     const notiRef = useRef<HTMLDivElement>(null);
@@ -135,7 +135,7 @@ const Header = () => {
                         </button>
 
 
-                        <button type="button" onClick={() => route.push("/personal-profile")} className="gl-user-avatar-block">
+                        <button type="button" onClick={() => router.push("/personal-profile")} className="gl-user-avatar-block">
                             <img src="/images/header-user-right-profile.svg" alt="User Profile" className="gl-user-avatar" />
                             <p className="profile-header-text">Dr. Rafael Costa <br /> <span>Stress Specialist</span></p>
                             <img src="/images/header-right-arrow.svg" alt="User Profile" className="gl-user-down-icon" />
@@ -152,7 +152,7 @@ const Header = () => {
                             <img src="images/header-toggle.svg" alt="Toggle" />
                         </button>
                         <div className="header-left-part">
-                            <h1 className="gl-header-panel-title">Back to calendar</h1>
+                            <h1 className="gl-header-panel-title" onClick={() => router.back()}>Back to calendar</h1>
                         </div>
                     </div>
 
@@ -171,7 +171,7 @@ const Header = () => {
                         <div className="action-btn-container">
                             {/*     
     <!-- Button 1: View Filled Form --> */}
-                            <button className="action-btn-base action-btn-filled">
+                            <button className="action-btn-base action-btn-filled" onClick={() => router.push("/final-back-to-agenda")}>
                                 View Filled Form
                             </button>
 

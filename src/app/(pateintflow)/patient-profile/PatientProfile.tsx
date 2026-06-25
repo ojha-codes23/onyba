@@ -5,6 +5,7 @@ import profileData from '@/src/data/patientProfileData.json'
 import Pagination from '@/src/component/common/Pagintion'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import DateRangePicker from '@/src/component/DateRangePicker'
 
 const PatientProfile = () => {
 
@@ -42,7 +43,7 @@ const PatientProfile = () => {
                             </svg>
                             Back to patients
                         </a>
-                        <button type="button" className="dbt-pcard-action-top" data-bs-toggle="modal" data-bs-target="#aiSummaryModal">View AI Chat Summary</button>
+                        <button type="button" className="dbt-pcard-action-top" data-bs-toggle="modal" data-bs-target="#aiSummaryModal1">View AI Chat Summary</button>
                     </div>
 
                     <div className="dbt-pcard-container">
@@ -91,7 +92,17 @@ const PatientProfile = () => {
                                 <input type="text" placeholder="Search" className="dbt4-search-input" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
                             </div>
                             <div className="dbt4-right-filters">
-                                <button className="dbt4-filter-dropdown">Date Range <span className="dbt4-cal-icon"><img src="/images/date-icon.svg" alt="" /></span></button>
+                                <DateRangePicker
+                                    onChange={(range) => {
+                                        console.log("Selected Start Date:", range.startDate);
+                                        console.log("Selected End Date:", range.endDate);
+                                    }}
+                                >
+                                    <button className="dbt4-filter-dropdown" type="button">
+                                        Date Range <span className="dbt4-cal-icon"><img src="/images/date-icon.svg" alt="" /></span>
+                                    </button>
+                                </DateRangePicker>
+                                {/* <button className="dbt4-filter-dropdown">Date Range <span className="dbt4-cal-icon"><img src="/images/date-icon.svg" alt="" /></span></button> */}
                                 <div className="dropdown dbt4-bs-dropdown-wrapper">
                                     <button className="dbt4-filter-dropdown dropdown-toggle dbt4-remove-arrow" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Session Type {sessionTypeFilter !== 'All' ? `(${sessionTypeFilter})` : ''} <span className="dbt4-arrow-icon"><img src="/images/dropdown-icon.svg" alt="" /></span>

@@ -28,7 +28,7 @@ const WelcomeModal = () => {
 
               <p className="modal-custom-text">Your account is ready, start exploring now !</p>
 
-              <button type="button" className="btn-custom-ok" onClick={handleOk}>Ok</button>
+              <button type="button" className="btn-custom-ok" data-bs-dismiss="modal" onClick={handleOk}>Ok</button>
 
             </div>
           </div>

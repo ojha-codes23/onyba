@@ -1,7 +1,13 @@
-import Link from 'next/link'
+import { useRouter } from 'next/navigation';
 import React from 'react'
 
 const ProfileApproved = () => {
+  const router = useRouter();
+
+  const handleOk = () => {
+    router.push('/dashboard');
+  }
+
   return (
     <>
       <div className="modal fade" id="profileApprovedModal" tabIndex={-1} aria-hidden="true">
@@ -24,7 +30,7 @@ const ProfileApproved = () => {
                 Congratulations! Your profile has been approved successfully. You can now start accepting appointments.
               </p>
 
-              <Link href="/dashboard" className="btn-custom-ok" data-bs-dismiss="modal">Continue to Dashboard</Link>
+              <button data-bs-dismiss="modal" onClick={handleOk} className="btn-custom-ok" >Continue to Dashboard</button>
 
             </div>
           </div>

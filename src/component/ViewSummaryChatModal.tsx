@@ -3,7 +3,7 @@ import React from 'react'
 const ViewSummaryChatModal = () => {
   return (
     <>
-      <div className="modal fade" id="aiSummaryModal" tabIndex={-1} aria-labelledby="aiSummaryModalLabel" aria-hidden="true">
+      <div className="modal fade" id="aiSummaryModal1" tabIndex={-1} aria-labelledby="aiSummaryModalLabel" aria-hidden="true">
     <div className="modal-dialog modal-dialog-centered modal-lg">
         <div className="modal-content dbt-popup-content-box">
             

@@ -1,26 +1,60 @@
+"use client";
+import AgendaCalendarPopup from '@/src/component/AgendaCalendarPopup'
 import CancelSessionPopup from '@/src/component/CancelSessionPopup'
-import React from 'react'
+import Link from 'next/link'
+import React, { useState, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 
 const FinalAgenda = () => {
+  const router = useRouter();
+  const [otp, setOtp] = useState(['', '', '', '', '']);
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
+  const handleOtpChange = (index: number, value: string) => {
+    if (isNaN(Number(value))) return;
+
+    const newOtp = [...otp];
+    newOtp[index] = value;
+    setOtp(newOtp);
+
+    if (value !== '' && index < 4) {
+      inputRefs.current[index + 1]?.focus();
+    }
+  };
+
+  const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Backspace' && otp[index] === '' && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+  };
+
+  const handleVerify = () => {
+    if (otp.join('').length === 5) {
+      router.push('/video-confrenece');
+    } else {
+      // Could show an error or simply require all 5 digits
+    }
+  };
+
   return (
     <>
       <main className="gl-content-body">
 
         <div className="patients-profile-wrp">
           <div className="dbt-pcard-top-nav">
-            <a href="#" className="dbt-pcard-back-btn">
+            <Link href="/agenda" className="dbt-pcard-back-btn">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-left" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
               </svg>
-              Back to patients
-            </a>
+              Back to Agendas
+            </Link>
             <div className="patient-nav-container">
 
-              <a href="#" className="patient-link-start-session">
+              <Link href="/video-confrenece" className="patient-link-start-session">
                 Start Session
-              </a>
+              </Link>
 
-              <a href="#" className="patient-link-back-to-patients">
+              <a href="#" className="patient-link-back-to-patients" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 <img src="images/reschedule.svg" alt="" />
                 Reschedule
               </a>
@@ -34,6 +68,8 @@ const FinalAgenda = () => {
 
             </div>
           </div>
+
+
 
           <div className="dbt-pcard-container">
 
@@ -71,6 +107,44 @@ const FinalAgenda = () => {
               <div className="dbt-pcard-info-row">Insurance No.-: <span>12/1234567890/12</span></div>
             </div>
 
+          </div>
+
+          <div className="session-verify-card">
+            <div className="session-verify-left">
+              <div className="session-verify-icon-wrapper">
+                <img src="images/otp-login-icon.svg" alt="" />
+              </div>
+              <div className="session-verify-text-content">
+                <h2 className="session-verify-title">Verify Patient to Start Session</h2>
+                <p className="session-verify-subtitle">Ask the patient for the verification code at the clinic.</p>
+              </div>
+            </div>
+
+            <div className="session-verify-right">
+              <div className="session-code-inputs-container">
+                {otp.map((digit, index) => (
+                  <input
+                    key={index}
+                    ref={(el) => {
+                      inputRefs.current[index] = el;
+                    }}
+                    type="text"
+                    inputMode="numeric"
+                    className="session-code-field"
+                    maxLength={1}
+                    placeholder={(index + 1).toString()}
+                    value={digit}
+                    onChange={(e) => handleOtpChange(index, e.target.value)}
+                    onKeyDown={(e) => handleKeyDown(index, e)}
+                    required
+                  />
+                ))}
+              </div>
+
+              <button type="button" onClick={handleVerify} className="session-submit-btn" id="btnVerifySession">Verify & Start Session</button>
+
+              <p className="session-resend-text">Didn’t receive code? <span className="session-resend-link" id="lnkResendSessionCode">Resend</span></p>
+            </div>
           </div>
 
           <div className="service-selection-card">
@@ -180,6 +254,8 @@ const FinalAgenda = () => {
 
               </div>
             </div>
+
+
 
             <div className="service-card-header choose">
               <div className="service-header-icon-wrapper">
@@ -682,6 +758,7 @@ const FinalAgenda = () => {
       </main>
 
       <CancelSessionPopup />
+      <AgendaCalendarPopup />
     </>
   )
 }

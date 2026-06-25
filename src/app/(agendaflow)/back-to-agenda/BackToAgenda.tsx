@@ -1,6 +1,8 @@
 import CancelSessionPopup from '@/src/component/CancelSessionPopup'
 import React from 'react'
 import agendaData from '@/src/data/backToAgendaData.json'
+import Link from 'next/link'
+import AgendaCalendarPopup from '@/src/component/AgendaCalendarPopup'
 
 const BackToAgenda = () => {
     return (
@@ -9,22 +11,22 @@ const BackToAgenda = () => {
 
                 <div className="patients-profile-wrp">
                     <div className="dbt-pcard-top-nav">
-                        <a href="#" className="dbt-pcard-back-btn">
+                        <Link href="/agenda" className="dbt-pcard-back-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-left" viewBox="0 0 16 16">
                                 <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
                             </svg>
                             Back to Agendas
-                        </a>
+                        </Link>
                         <div className="patient-nav-container">
 
-                            <a href="#" className="patient-link-start-session">
+                            <Link href="/video-confrence" className="patient-link-start-session">
                                 Start Session
-                            </a>
+                            </Link>
 
-                            <a href="#" className="patient-link-back-to-patients">
+                            <Link href="#" className="patient-link-back-to-patients" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <img src="images/reschedule.svg" alt="" />
                                 Reschedule
-                            </a>
+                            </Link>
 
                             <a href="#" className="patient-link-cancel-session" data-bs-toggle="modal" data-bs-target="#cancelSessionModal">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -105,63 +107,63 @@ const BackToAgenda = () => {
                     </div>
 
                     <div className="financial-details-card">
-   <div className="container ps-sessions-page-container">
-  
-  <div className="accordion ps-sessions-accordion" id="accordionExample">
-    
-    <div className="accordion-item">
-      <h2 className="accordion-header" id="headingOne">
-        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-          
-          <div className="ps-sessions-header-main d-flex align-items-center">
-            <div className="ps-sessions-header-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
-              </svg>
-            </div>
-            <span className="ps-sessions-title">Previous Sessions</span>
-          </div>
+                        <div className="container ps-sessions-page-container">
 
-        </button>
-      </h2>
-      
-      <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-        <div className="accordion-body">
-          
-          <div className="ps-sessions-search-wrapper">
-            <svg className="ps-sessions-search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-            <input type="text" className="ps-sessions-search-input" placeholder="Search"/>
-          </div>
+                            <div className="accordion ps-sessions-accordion" id="accordionExample">
 
-          <div className="ps-sessions-inner-box">
-            {agendaData.previousSessions.map(session => (
-                <div className="ps-sessions-list-item" key={session.id}>
-                  <div className="ps-sessions-col-name">
-                    <span className="ps-sessions-dot"></span> {session.name}
-                  </div>
-                  <div className="ps-sessions-col-date">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                    {session.date}
-                  </div>
-                  <div className="ps-sessions-col-details">
-                    <span className="ps-sessions-muted-prefix">Session Details -:</span> {session.details}
-                  </div>
-                </div>
-            ))}
-          </div>
+                                <div className="accordion-item">
+                                    <h2 className="accordion-header" id="headingOne">
+                                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
 
-        </div>
-      </div>
-    </div>
+                                            <div className="ps-sessions-header-main d-flex align-items-center">
+                                                <div className="ps-sessions-header-icon">
+                                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                                                    </svg>
+                                                </div>
+                                                <span className="ps-sessions-title">Previous Sessions</span>
+                                            </div>
 
-  </div>
-</div>
-{/* </div> */}
+                                        </button>
+                                    </h2>
+
+                                    <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div className="accordion-body">
+
+                                            <div className="ps-sessions-search-wrapper">
+                                                <svg className="ps-sessions-search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                                </svg>
+                                                <input type="text" className="ps-sessions-search-input" placeholder="Search" />
+                                            </div>
+
+                                            <div className="ps-sessions-inner-box">
+                                                {agendaData.previousSessions.map(session => (
+                                                    <div className="ps-sessions-list-item" key={session.id}>
+                                                        <div className="ps-sessions-col-name">
+                                                            <span className="ps-sessions-dot"></span> {session.name}
+                                                        </div>
+                                                        <div className="ps-sessions-col-date">
+                                                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                                            {session.date}
+                                                        </div>
+                                                        <div className="ps-sessions-col-details">
+                                                            <span className="ps-sessions-muted-prefix">Session Details -:</span> {session.details}
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        {/* </div> */}
 
 
-                    {/* <div className="financial-details-card"> */}
+                        {/* <div className="financial-details-card"> */}
 
                         <div className="financial-card-header">
                             <div className="financial-header-icon-box">
@@ -298,8 +300,9 @@ const BackToAgenda = () => {
 
                 </div>
             </main>
-           
-           <CancelSessionPopup/>
+
+            <CancelSessionPopup />
+            <AgendaCalendarPopup />
         </>
     )
 }

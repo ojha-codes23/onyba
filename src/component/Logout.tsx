@@ -31,7 +31,7 @@ const Logout = () => {
 
                             <div className="onyba-logout-actions-row">
                                 <button type="button" className="onyba-logout-btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" className="onyba-logout-btn-confirm" onClick={() => handleLogout()} >Yes, Logout</button>
+                                <button type="button" className="onyba-logout-btn-confirm" onClick={() => handleLogout()} data-bs-dismiss="modal" >Yes, Logout</button>
                             </div>
 
                         </div>

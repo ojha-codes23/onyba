@@ -1,11 +1,5 @@
-import Dashboard from "./(onboard)/dashboard/Dashboard";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <>
-  
-    <Dashboard/>
-   
-    </>
-  );
+  redirect("/login");
 }

@@ -203,8 +203,6 @@ const Agenda = () => {
                     </div>
 
 
-
-
                 </div>
             </main>
 

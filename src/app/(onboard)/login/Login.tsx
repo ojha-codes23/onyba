@@ -17,52 +17,67 @@ const Login = () => {
     }
 
 
+    // const validation = () => {
+    //     if (!value || value.trim() === "") {
+    //         setError("Enter your email or phone number");
+    //         return false;
+    //     }
+
+    //     const input = value.trim();
+
+    //     // Phone number (10 digits)
+    //     const phoneRegex = /^[6-9]\d{9}$/;
+
+    //     // Email
+    //     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    //     // If it's a phone number
+    //     if (phoneRegex.test(input)) {
+    //         setError("");
+    //         return true;
+    //     }
+
+    //     // If it's an email
+    //     if (emailRegex.test(input)) {
+    //         const blockedDomains = [
+    //             "yopmail.com",
+    //             "tempmail.com",
+    //             "10minutemail.com",
+    //             "guerrillamail.com",
+    //             "mailinator.com",
+    //         ];
+
+    //         const domain = input.split("@")[1].toLowerCase();
+
+    //         if (blockedDomains.includes(domain)) {
+    //             setError("Temporary email addresses are not allowed");
+    //             return false;
+    //         }
+
+    //         setError("");
+    //         return true;
+    //     }
+
+    //     setError("Enter a valid email or phone number");
+    //     return false;
+    // };
+
     const validation = () => {
         if (!value || value.trim() === "") {
-            setError("Enter your email or phone number");
+            setError("Email is required");
             return false;
         }
 
-        const input = value.trim();
-
-        // Phone number (10 digits)
-        const phoneRegex = /^[6-9]\d{9}$/;
-
-        // Email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        // If it's a phone number
-        if (phoneRegex.test(input)) {
-            setError("");
-            return true;
+        if (!emailRegex.test(value.trim())) {
+            setError("Please enter a valid email address");
+            return false;
         }
 
-        // If it's an email
-        if (emailRegex.test(input)) {
-            const blockedDomains = [
-                "yopmail.com",
-                "tempmail.com",
-                "10minutemail.com",
-                "guerrillamail.com",
-                "mailinator.com",
-            ];
-
-            const domain = input.split("@")[1].toLowerCase();
-
-            if (blockedDomains.includes(domain)) {
-                setError("Temporary email addresses are not allowed");
-                return false;
-            }
-
-            setError("");
-            return true;
-        }
-
-        setError("Enter a valid email or phone number");
-        return false;
+        setError("");
+        return true;
     };
-
-
     const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!validation()) {

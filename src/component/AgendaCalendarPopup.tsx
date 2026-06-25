@@ -1,6 +1,108 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react';
 
-const AgendaCalendarPopup = () => {
+export interface Patient {
+  id: string;
+  name: string;
+  userType: string;
+}
+
+export interface Service {
+  id: string;
+  name: string;
+  sessionType: string;
+}
+
+export interface AgendaCalendarPopupProps {
+  patients?: Patient[];
+  services?: Service[];
+  availableTimes?: string[];
+  onSubmit?: (data: any) => void;
+}
+
+const DEFAULT_PATIENTS: Patient[] = [
+  { id: '1', name: 'John Carter', userType: 'Patient' },
+  { id: '2', name: 'Jane Doe', userType: 'Patient' },
+  { id: '3', name: 'Alex Smith', userType: 'Patient' },
+];
+
+const DEFAULT_SERVICES: Service[] = [
+  { id: '1', name: 'General Consultation', sessionType: 'Adult' },
+  { id: '2', name: 'Therapy Session', sessionType: 'Adult' },
+];
+
+const DEFAULT_TIMES = ['09:00', '10:00', '11:00', '12:00', '01:00', '02:00', '03:00', '04:00'];
+
+const AgendaCalendarPopup: React.FC<AgendaCalendarPopupProps> = ({
+  patients = DEFAULT_PATIENTS,
+  services = DEFAULT_SERVICES,
+  availableTimes = DEFAULT_TIMES,
+  onSubmit,
+}) => {
+  const [selectedPatientId, setSelectedPatientId] = useState(patients[0]?.id || '');
+  const [selectedServiceId, setSelectedServiceId] = useState('');
+  const [selectedTime, setSelectedTime] = useState('10:00');
+  const [remarks, setRemarks] = useState('');
+
+  const [currentDate, setCurrentDate] = useState(new Date(2026, 3, 1)); // April 2026
+  const [selectedDay, setSelectedDay] = useState<number | null>(1);
+
+  const selectedPatient = patients.find((p) => p.id === selectedPatientId);
+  const selectedService = services.find((s) => s.id === selectedServiceId);
+
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const firstDayIndex = new Date(year, month, 1).getDay();
+  const startOffset = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+
+  const handlePrevMonth = () => {
+    setCurrentDate(new Date(year, month - 1, 1));
+    setSelectedDay(null);
+  };
+
+  const handleNextMonth = () => {
+    setCurrentDate(new Date(year, month + 1, 1));
+    setSelectedDay(null);
+  };
+
+  const monthNames = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December',
+  ];
+  const monthYearString = `${monthNames[month]} ${year}`;
+
+  const disabledDays = new Set([4, 5, 6, 9, 10, 12, 15, 17, 20, 24, 25, 26, 30]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const data = {
+      patient: selectedPatient,
+      service: selectedService,
+      date: selectedDay ? new Date(year, month, selectedDay) : null,
+      time: selectedTime,
+      remarks,
+    };
+    if (onSubmit) {
+      onSubmit(data);
+    } else {
+      console.log('Form Submitted', data);
+    }
+  };
+
+  const formatSummaryDate = () => {
+    if (!selectedDay) return '-';
+    return `${monthNames[month]} ${selectedDay}, ${year}`;
+  };
+
+  const formatTime = (time: string) => {
+    if (!time) return '-';
+    const hour = parseInt(time.split(':')[0], 10);
+    const ampm = hour >= 7 && hour < 12 ? 'AM' : 'PM';
+    return `${time} ${hour === 12 ? 'PM' : ampm}`;
+  };
+
   return (
     <>
       {/* <div classNameName="modal fade" id="onybaAgendaModal" tabIndex={-1}aria-hidden="true">
@@ -148,180 +250,205 @@ const AgendaCalendarPopup = () => {
         </div>
     </div> */}
 
-    <div className="modal fade agd-custom-modal" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div className="modal-dialog modal-lg modal-dialog-centered">
-    <div className="modal-content">
-      
-      <div className="modal-header">
-        <h3 className="modal-title fw-bold" id="exampleModalLabel" style={{ color: "#212529", marginBottom: "5px" }}>Agenda</h3>
-        <p className="text-muted small" style={{margin:"0"}}>Book the agenda for the user.</p>
-        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      
-      <form id="agdPopupForm">
-          
-          <div className="modal-body">
-            
-            <div className="agd-popup-form-group">
-                <label className="agd-popup-label">Patient Name*</label>
-                <select className="agd-popup-select" id="agdPatientField" required>
-                    <option value="John Carter" selected>John Carter</option>
-                    <option value="Jane Doe">Jane Doe</option>
-                    <option value="Alex Smith">Alex Smith</option>
-                </select>
+      <div
+        className="modal fade agd-custom-modal"
+        id="exampleModal"
+        data-bs-backdrop="static"
+        data-bs-keyboard="false"
+        tabIndex={-1}
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-lg modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h3 className="modal-title fw-bold" id="exampleModalLabel" style={{ color: '#212529', marginBottom: '5px' }}>
+                Agenda
+              </h3>
+              <p className="text-muted small" style={{ margin: '0' }}>
+                Book the agenda for the user.
+              </p>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-            <div className="agd-popup-flex-row">
-                
-                <div className="agd-popup-flex-col-left">
+            <form id="agdPopupForm" onSubmit={handleSubmit}>
+              <div className="modal-body">
+                <div className="agd-popup-form-group">
+                  <label className="agd-popup-label">Patient Name*</label>
+                  <select
+                    className="agd-popup-select"
+                    id="agdPatientField"
+                    required
+                    value={selectedPatientId}
+                    onChange={(e) => setSelectedPatientId(e.target.value)}
+                  >
+                    {patients.map((p) => (
+                      <option key={p.id} value={p.id}>
+                        {p.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="agd-popup-flex-row">
+                  <div className="agd-popup-flex-col-left">
                     <label className="agd-popup-label">Pick a Date</label>
                     <div className="agd-popup-calendar-box">
-                        <div className="agd-popup-calendar-nav">
-                            <span>April 2026</span>
-                            <div className="agd-popup-calendar-icons">
-                                <i className="bi bi-chevron-left"></i>
-                                <i className="bi bi-chevron-right"></i>
-                            </div>
+                      <div className="agd-popup-calendar-nav">
+                        <span>{monthYearString}</span>
+                        <div className="agd-popup-calendar-icons" style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+                          <img
+                            src="/images/left-icon-agenda.svg"
+                            alt="Previous Month"
+                            onClick={handlePrevMonth}
+                            style={{ cursor: 'pointer', width: '14px', height: '14px' }}
+                          />
+                          <img
+                            src="/images/right-icon-agenda.svg"
+                            alt="Next Month"
+                            onClick={handleNextMonth}
+                            style={{ cursor: 'pointer', width: '14px', height: '14px' }}
+                          />
                         </div>
-                        
-                        <div className="agd-popup-calendar-days-wrapper">
-                            <div className="agd-popup-day-cell agd-popup-day-header">Mon</div>
-                            <div className="agd-popup-day-cell agd-popup-day-header">Tue</div>
-                            <div className="agd-popup-day-cell agd-popup-day-header">Wed</div>
-                            <div className="agd-popup-day-cell agd-popup-day-header">Thur</div>
-                            <div className="agd-popup-day-cell agd-popup-day-header">Fri</div>
-                            <div className="agd-popup-day-cell agd-popup-day-header">Sat</div>
-                            <div className="agd-popup-day-cell agd-popup-day-header">Sun</div>
-                            
-                            <div className="agd-popup-day-cell agd-popup-day-clickable agd-popup-day-active">1</div>
-                            <div className="agd-popup-day-cell agd-popup-day-clickable">2</div>
-                            <div className="agd-popup-day-cell agd-popup-day-clickable">3</div>
-                            <div className="agd-popup-day-cell agd-popup-day-disabled">4</div>
-                            <div className="agd-popup-day-cell agd-popup-day-disabled">5</div>
-                            <div className="agd-popup-day-cell agd-popup-day-disabled">6</div>
-                            <div className="agd-popup-day-cell agd-popup-day-clickable">7</div>
-                            <div className="agd-popup-day-cell agd-popup-day-clickable">8</div>
-                            <div className="agd-popup-day-cell agd-popup-day-disabled">9</div>
-                            <div className="agd-popup-day-cell agd-popup-day-disabled">10</div>
-                            <div className="agd-popup-day-cell agd-popup-day-clickable">11</div>
-                            <div className="agd-popup-day-cell agd-popup-day-disabled">12</div>
-                            <div className="agd-popup-day-cell agd-popup-day-clickable">13</div>
-                            <div className="agd-popup-day-cell agd-popup-day-clickable">14</div>
-                            <div className="agd-popup-day-cell agd-popup-day-disabled">15</div>
-                            <div className="agd-popup-day-cell agd-popup-day-clickable">16</div>
-                            <div className="agd-popup-day-cell agd-popup-day-disabled">17</div>
-                            <div className="agd-popup-day-cell agd-popup-day-clickable">18</div>
-                            <div className="agd-popup-day-cell agd-popup-day-clickable">19</div>
-                            <div className="agd-popup-day-cell agd-popup-day-disabled">20</div>
-                            <div className="agd-popup-day-cell agd-popup-day-clickable">21</div>
-                            <div className="agd-popup-day-cell agd-popup-day-clickable">22</div>
-                            <div className="agd-popup-day-cell agd-popup-day-clickable">23</div>
-                            <div className="agd-popup-day-cell agd-popup-day-disabled">24</div>
-                            <div className="agd-popup-day-cell agd-popup-day-disabled">25</div>
-                            <div className="agd-popup-day-cell agd-popup-day-disabled">26</div>
-                            <div className="agd-popup-day-cell agd-popup-day-clickable">27</div>
-                            <div className="agd-popup-day-cell agd-popup-day-clickable">28</div>
-                            <div className="agd-popup-day-cell agd-popup-day-clickable">29</div>
-                            <div className="agd-popup-day-cell agd-popup-day-disabled">30</div>
-                            <div className="agd-popup-day-cell agd-popup-day-clickable">31</div>
-                        </div>
-                    </div>
-                </div>
+                      </div>
 
-                <div className="agd-popup-flex-col-right">
+                      <div className="agd-popup-calendar-days-wrapper">
+                        <div className="agd-popup-day-cell agd-popup-day-header">Mon</div>
+                        <div className="agd-popup-day-cell agd-popup-day-header">Tue</div>
+                        <div className="agd-popup-day-cell agd-popup-day-header">Wed</div>
+                        <div className="agd-popup-day-cell agd-popup-day-header">Thur</div>
+                        <div className="agd-popup-day-cell agd-popup-day-header">Fri</div>
+                        <div className="agd-popup-day-cell agd-popup-day-header">Sat</div>
+                        <div className="agd-popup-day-cell agd-popup-day-header">Sun</div>
+
+                        {Array.from({ length: startOffset }).map((_, i) => (
+                          <div key={`empty-${i}`} className="agd-popup-day-cell"></div>
+                        ))}
+
+                        {Array.from({ length: daysInMonth }).map((_, i) => {
+                          const day = i + 1;
+                          const isDisabled = disabledDays.has(day) && month === 3 && year === 2026;
+                          const isSelected = selectedDay === day;
+
+                          let className = 'agd-popup-day-cell ';
+                          if (isDisabled) {
+                            className += 'agd-popup-day-disabled';
+                          } else {
+                            className += 'agd-popup-day-clickable';
+                            if (isSelected) {
+                              className += ' agd-popup-day-active';
+                            }
+                          }
+
+                          return (
+                            <div
+                              key={day}
+                              className={className}
+                              onClick={() => !isDisabled && setSelectedDay(day)}
+                            >
+                              {day}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="agd-popup-flex-col-right">
                     <label className="agd-popup-label">Available Times</label>
                     <div className="agd-popup-time-slots-container">
-                        
-                        <div className="agd-popup-time-checkbox-wrapper">
-                            <input type="checkbox" name="time_slots" value="09:00" className="agd-popup-time-input"/>
-                            <span className="agd-popup-time-label">09:00</span>
+                      {availableTimes.map((time) => (
+                        <div className="agd-popup-time-checkbox-wrapper" key={time}>
+                          <input
+                            type="checkbox"
+                            name="time_slots"
+                            value={time}
+                            className="agd-popup-time-input"
+                            checked={selectedTime === time}
+                            onChange={() => setSelectedTime(time)}
+                          />
+                          <span className="agd-popup-time-label">{time}</span>
                         </div>
-                        <div className="agd-popup-time-checkbox-wrapper">
-                            <input type="checkbox" name="time_slots" value="10:00" className="agd-popup-time-input" checked/>
-                            <span className="agd-popup-time-label">10:00</span>
-                        </div>
-                        <div className="agd-popup-time-checkbox-wrapper">
-                            <input type="checkbox" name="time_slots" value="11:00" className="agd-popup-time-input"/>
-                            <span className="agd-popup-time-label">11:00</span>
-                        </div>
-                        <div className="agd-popup-time-checkbox-wrapper">
-                            <input type="checkbox" name="time_slots" value="12:00" className="agd-popup-time-input"/>
-                            <span className="agd-popup-time-label">12:00</span>
-                        </div>
-                        <div className="agd-popup-time-checkbox-wrapper">
-                            <input type="checkbox" name="time_slots" value="01:00" className="agd-popup-time-input"/>
-                            <span className="agd-popup-time-label">01:00</span>
-                        </div>
-                        <div className="agd-popup-time-checkbox-wrapper">
-                            <input type="checkbox" name="time_slots" value="02:00" className="agd-popup-time-input"/>
-                            <span className="agd-popup-time-label">02:00</span>
-                        </div>
-                        <div className="agd-popup-time-checkbox-wrapper">
-                            <input type="checkbox" name="time_slots" value="03:00" className="agd-popup-time-input"/>
-                            <span className="agd-popup-time-label">03:00</span>
-                        </div>
-                        <div className="agd-popup-time-checkbox-wrapper">
-                            <input type="checkbox" name="time_slots" value="04:00" className="agd-popup-time-input"/>
-                            <span className="agd-popup-time-label">04:00</span>
-                        </div>
-
+                      ))}
                     </div>
+                  </div>
                 </div>
 
-            </div>
-
-            <div className="agd-popup-form-group">
-                <label className="agd-popup-label">Service Name*</label>
-                <select className="agd-popup-select" id="agdServiceField" required>
-                    <option value="" disabled selected>Select service</option>
-                    <option value="Consultation">General Consultation</option>
-                    <option value="Therapy">Therapy Session</option>
-                </select>
-            </div>
-
-            <div className="agd-popup-form-group">
-                <label className="agd-popup-label">Add Remarks</label>
-                <textarea className="agd-popup-textarea" rows={3} placeholder="Enter remarks or notes here"></textarea>
-            </div>
-
-            <div className="agd-popup-form-group">
-                <h5 className="agd-popup-summary-title">Session Summary</h5>
-                <div className="agd-popup-summary-card">
-                    <div className="agd-popup-summary-item">
-                        <span className="agd-popup-summary-lbl">User Type</span>
-                        <span className="agd-popup-summary-val">Patient</span>
-                    </div>
-                    <div className="agd-popup-summary-item">
-                        <span className="agd-popup-summary-lbl">Patient Name</span>
-                        <span className="agd-popup-summary-val" id="agdSummaryPatient">John Carter</span>
-                    </div>
-                    <div className="agd-popup-summary-item">
-                        <span className="agd-popup-summary-lbl">Session Date</span>
-                        <span className="agd-popup-summary-val" id="agdSummaryDate">May 20, 2026</span>
-                    </div>
-                    <div className="agd-popup-summary-item">
-                        <span className="agd-popup-summary-lbl">Session Time</span>
-                        <span className="agd-popup-summary-val" id="agdSummaryTime">10:00 AM</span>
-                    </div>
-                    <div className="agd-popup-summary-item">
-                        <span className="agd-popup-summary-lbl">Session Type</span>
-                        <span className="agd-popup-summary-val">Adult</span>
-                    </div>
+                <div className="agd-popup-form-group">
+                  <label className="agd-popup-label">Service Name*</label>
+                  <select
+                    className="agd-popup-select"
+                    id="agdServiceField"
+                    required
+                    value={selectedServiceId}
+                    onChange={(e) => setSelectedServiceId(e.target.value)}
+                  >
+                    <option value="" disabled>
+                      Select service
+                    </option>
+                    {services.map((s) => (
+                      <option key={s.id} value={s.id}>
+                        {s.name}
+                      </option>
+                    ))}
+                  </select>
                 </div>
-            </div>
 
-          </div>
-          
-          <div className="modal-footer">
-            <button type="submit" className="agd-popup-btn-submit">Create Agenda</button>
-          </div>
+                <div className="agd-popup-form-group">
+                  <label className="agd-popup-label">Add Remarks</label>
+                  <textarea
+                    className="agd-popup-textarea"
+                    rows={3}
+                    placeholder="Enter remarks or notes here"
+                    value={remarks}
+                    onChange={(e) => setRemarks(e.target.value)}
+                  ></textarea>
+                </div>
 
-      </form>
-    </div>
-  </div>
-</div>
+                <div className="agd-popup-form-group">
+                  <h5 className="agd-popup-summary-title">Session Summary</h5>
+                  <div className="agd-popup-summary-card">
+                    <div className="agd-popup-summary-item">
+                      <span className="agd-popup-summary-lbl">User Type</span>
+                      <span className="agd-popup-summary-val">{selectedPatient?.userType || '-'}</span>
+                    </div>
+                    <div className="agd-popup-summary-item">
+                      <span className="agd-popup-summary-lbl">Patient Name</span>
+                      <span className="agd-popup-summary-val" id="agdSummaryPatient">
+                        {selectedPatient?.name || '-'}
+                      </span>
+                    </div>
+                    <div className="agd-popup-summary-item">
+                      <span className="agd-popup-summary-lbl">Session Date</span>
+                      <span className="agd-popup-summary-val" id="agdSummaryDate">
+                        {formatSummaryDate()}
+                      </span>
+                    </div>
+                    <div className="agd-popup-summary-item">
+                      <span className="agd-popup-summary-lbl">Session Time</span>
+                      <span className="agd-popup-summary-val" id="agdSummaryTime">
+                        {formatTime(selectedTime)}
+                      </span>
+                    </div>
+                    <div className="agd-popup-summary-item">
+                      <span className="agd-popup-summary-lbl">Session Type</span>
+                      <span className="agd-popup-summary-val">{selectedService?.sessionType || '-'}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="modal-footer">
+                <button type="submit" className="agd-popup-btn-submit">
+                  Create Agenda
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default AgendaCalendarPopup
+export default AgendaCalendarPopup;

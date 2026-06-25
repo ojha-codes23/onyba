@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import earningData from '@/src/data/earningData.json'
 import Pagination from '@/src/component/common/Pagintion'
+import DateRangePicker from '@/src/component/DateRangePicker'
 
 const EarningReport = () => {
     const [searchQuery, setSearchQuery] = useState("");
@@ -172,7 +173,17 @@ const EarningReport = () => {
                                         <li><a className={`dropdown-item dbt4-bs-item ${sessionTypeFilter === 'Coaching' ? 'active-filter' : ''}`} href="#" onClick={(e) => { e.preventDefault(); setSessionTypeFilter('Coaching'); }}>Coaching</a></li>
                                     </ul>
                                 </div>
-                                <button className="dbt4-filter-dropdown">Date Range <span className="dbt4-cal-icon"><img src="images/date-icon.svg" alt="" /></span></button>
+                                <DateRangePicker
+                                    onChange={(range) => {
+                                        console.log("Selected Start Date:", range.startDate);
+                                        console.log("Selected End Date:", range.endDate);
+                                    }}
+                                >
+                                    <button className="dbt4-filter-dropdown" type="button">
+                                        Date Range <span className="dbt4-cal-icon"><img src="/images/date-icon.svg" alt="" /></span>
+                                    </button>
+                                </DateRangePicker>
+                                {/* <button className="dbt4-filter-dropdown">Date Range <span className="dbt4-cal-icon"><img src="images/date-icon.svg" alt="" /></span></button> */}
                                 <a href="#" className="dbt4-cta-add-patient" onClick={handleReset}> Reset
                                 </a>
                             </div>
