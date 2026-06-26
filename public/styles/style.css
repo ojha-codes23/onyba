@@ -7536,9 +7536,18 @@ div#accordionExample .accordion-item {
 }
 
 .onyba-prof-btn-mode--inactive {
-  background: linear-gradient(180deg, #93996D 0%, #52553E 100%);
-  color: #fff;
+  /* background: linear-gradient(180deg, #93996D 0%, #52553E 100%); */
+  /* color: #fff; */
+  color: black;
 }
+
+.onyba-prof-btn-mode--inactive img {
+  filter: brightness(0);
+}
+/* 
+.onyba-prof-btn-mode--inactive img {
+  filter: invert(0);
+} */
 
 .onyba-prof-address-card {
   display: flex;

@@ -9,6 +9,9 @@ import { toast } from "react-toastify";
 const PersonalProfile = () => {
     const [isEditing, setIsEditing] = useState(false);
 
+    const [selectSession, setSelectSession] = useState(false);
+    const [selectedModes, setSelectedModes] = useState<string[]>([]);
+
     const [profileImage, setProfileImage] = useState("/images/user-personal-profile.svg");
 
     const [profileData, setProfileData] = useState({
@@ -130,10 +133,16 @@ const PersonalProfile = () => {
             }),
             slots,
         };
-    
+
         console.log("Availability Data:", availabilityData);
         toast.success("Availability saved successfully!");
     };
+
+    const handleModeToggle = (mode: string) => {
+        setSelectedModes((prev) =>
+            prev.includes(mode) ? prev.filter((item) => item !== mode) : [...prev, mode]
+        )
+    }
 
     return (
         <>
@@ -301,14 +310,20 @@ const PersonalProfile = () => {
                                     <span className="onyba-prof-icon-badge"><img src="images/category-selection.svg" alt="" /></span>
                                     <h2>Category Selection</h2>
                                 </div>
-                                <button className="onyba-prof-btn-action">Add</button>
+                                <button className="onyba-prof-btn-action" onClick={() => setSelectSession(!selectSession)}>Add</button>
                             </div>
 
-                            <p className="onyba-prof-sub-title-text">Select session mode</p>
-                            <div className="onyba-prof-mode-toggle-row">
-                                <button className="onyba-prof-btn-mode onyba-prof-btn-mode--active"><img src="images/online-icon.svg" alt="" />Online</button>
-                                <button className="onyba-prof-btn-mode onyba-prof-btn-mode--inactive"><img src="images/hugeicons_location-05.svg" alt="" /> In-Person</button>
-                            </div>
+                            {selectSession && (<>
+                                <p className="onyba-prof-sub-title-text">Select session mode</p>
+                                <div className="onyba-prof-mode-toggle-row">
+                                    <button className={`onyba-prof-btn-mode ${selectedModes.includes("online") ? "onyba-prof-btn-mode--active" : "onyba-prof-btn-mode--inactive"}`} onClick={() => handleModeToggle("online")}>
+                                        <img src="images/online-icon.svg" alt="" />Online</button>
+
+                                    <button className={`onyba-prof-btn-mode ${selectedModes.includes("in-person") ? "onyba-prof-btn-mode--active" : "onyba-prof-btn-mode--inactive"}`} onClick={() => handleModeToggle("in-person")}>
+                                        <img src="images/hugeicons_location-05.svg" alt="" /> In-Person</button>
+                                </div>
+                            </>
+                            )}
 
                             <p className="onyba-prof-sub-title-text">Clinic Address</p>
                             <div className="onyba-prof-address-card">
@@ -642,7 +657,14 @@ const PersonalProfile = () => {
                             </div>
 
                             <div className="onyba-avail-footer-actions-row">
-                                <button className="onyba-avail-btn-secondary">Save for May 6</button>
+                                {/* <button className="onyba-avail-btn-secondary">Save for May 6</button> */}
+                                <button className="onyba-avail-btn-secondary">
+                                    Save for{" "}
+                                    {selectedDate.toLocaleDateString("en-US", {
+                                        month: "long",
+                                        day: "numeric",
+                                    })}
+                                </button>
                                 <button className="onyba-avail-btn-maroon">Save for all Saturdays</button>
                             </div>
 
