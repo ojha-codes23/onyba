@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import React from 'react'
+import GenerateAiSuccessSummaryModal from './GenerateAiSuccessSummaryModal'
 
 const GenerateAiSummaryModal = () => {
   return (
@@ -48,7 +48,7 @@ const GenerateAiSummaryModal = () => {
 
                     </div>
 
-                    <Link href="/back-to-agenda" className="onyba-ai-btn-skip" data-bs-modal="dismiss">Skip</Link>
+                    <button type="button" className="onyba-ai-btn-skip" data-bs-toggle="modal" data-bs-target="#endSessionModal1">Skip</button>
 
                 </div>
 
@@ -56,6 +56,7 @@ const GenerateAiSummaryModal = () => {
         </div>
     </div>
     
+    <GenerateAiSuccessSummaryModal />
     </>
   )
 }

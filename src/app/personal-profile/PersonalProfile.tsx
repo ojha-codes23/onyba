@@ -221,7 +221,7 @@ const PersonalProfile = () => {
                                         <select>
                                             {profileData.city.map((item, index) => (
 
-                                                <option>{item}</option>
+                                                <option key={index}>{item}</option>
                                             ))}
                                         </select>
                                     </div>
@@ -239,7 +239,7 @@ const PersonalProfile = () => {
                                         <select>
                                             {profileData.province.map((item, index) => (
 
-                                                <option>{item}</option>
+                                                <option key={index}>{item}</option>
                                             ))}
                                         </select>
                                     </div>
@@ -250,7 +250,7 @@ const PersonalProfile = () => {
                                         <select>
                                             {profileData.country.map((item, index) => (
 
-                                                <option>{item}</option>
+                                                <option key={index}>{item}</option>
                                             ))}
                                         </select>
                                     </div>
@@ -313,17 +313,11 @@ const PersonalProfile = () => {
                                 <button className="onyba-prof-btn-action" onClick={() => setSelectSession(!selectSession)}>Add</button>
                             </div>
 
-                            {selectSession && (<>
-                                <p className="onyba-prof-sub-title-text">Select session mode</p>
-                                <div className="onyba-prof-mode-toggle-row">
-                                    <button className={`onyba-prof-btn-mode ${selectedModes.includes("online") ? "onyba-prof-btn-mode--active" : "onyba-prof-btn-mode--inactive"}`} onClick={() => handleModeToggle("online")}>
-                                        <img src="images/online-icon.svg" alt="" />Online</button>
-
-                                    <button className={`onyba-prof-btn-mode ${selectedModes.includes("in-person") ? "onyba-prof-btn-mode--active" : "onyba-prof-btn-mode--inactive"}`} onClick={() => handleModeToggle("in-person")}>
-                                        <img src="images/hugeicons_location-05.svg" alt="" /> In-Person</button>
-                                </div>
-                            </>
-                            )}
+                            <p className="onyba-prof-sub-title-text">Select session mode</p>
+                            <div className="onyba-prof-mode-toggle-row">
+                                <button className="onyba-prof-btn-mode onyba-prof-btn-mode--active"><img src="images/online-icon.svg" alt="" />Online</button>
+                                <button className="onyba-prof-btn-mode onyba-prof-btn-mode--inactive"><img src="images/hugeicons_location-05.svg" alt="" /> In-Person</button>
+                            </div>
 
                             <p className="onyba-prof-sub-title-text">Clinic Address</p>
                             <div className="onyba-prof-address-card">

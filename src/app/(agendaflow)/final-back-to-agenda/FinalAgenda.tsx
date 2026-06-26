@@ -44,7 +44,7 @@ const FinalAgenda = () => {
           <div className="dbt-pcard-top-nav">
             <Link href="/agenda" className="dbt-pcard-back-btn">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
+                <path fillRule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0" />
               </svg>
               Back to Agendas
             </Link>
@@ -159,8 +159,8 @@ const FinalAgenda = () => {
 
                       <div className="ps-sessions-header-main d-flex align-items-center">
                         <div className="ps-sessions-header-icon">
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
                           </svg>
                         </div>
                         <span className="ps-sessions-title">Previous Sessions</span>
@@ -173,8 +173,8 @@ const FinalAgenda = () => {
                     <div className="accordion-body">
 
                       <div className="ps-sessions-search-wrapper">
-                        <svg className="ps-sessions-search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        <svg className="ps-sessions-search-icon" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                         <input type="text" className="ps-sessions-search-input" placeholder="Search" />
                       </div>
@@ -186,7 +186,7 @@ const FinalAgenda = () => {
                             <span className="ps-sessions-dot"></span> Session 1
                           </div>
                           <div className="ps-sessions-col-date">
-                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             May 20, 2026
                           </div>
                           <div className="ps-sessions-col-details">
@@ -199,7 +199,7 @@ const FinalAgenda = () => {
                             <span className="ps-sessions-dot"></span> Session 2
                           </div>
                           <div className="ps-sessions-col-date">
-                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             May 22, 2026
                           </div>
                           <div className="ps-sessions-col-details">
@@ -212,7 +212,7 @@ const FinalAgenda = () => {
                             <span className="ps-sessions-dot"></span> Session 3
                           </div>
                           <div className="ps-sessions-col-date">
-                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             May 24, 2026
                           </div>
                           <div className="ps-sessions-col-details">
@@ -225,7 +225,7 @@ const FinalAgenda = () => {
                             <span className="ps-sessions-dot"></span> Session 4
                           </div>
                           <div className="ps-sessions-col-date">
-                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             May 26, 2026
                           </div>
                           <div className="ps-sessions-col-details">
@@ -238,7 +238,7 @@ const FinalAgenda = () => {
                             <span className="ps-sessions-dot"></span> Session 5
                           </div>
                           <div className="ps-sessions-col-date">
-                            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             May 30, 2026
                           </div>
                           <div className="ps-sessions-col-details">
@@ -345,7 +345,7 @@ const FinalAgenda = () => {
               <div className="ony-summary-v2-header-wrapper">
                 <div className="ony-summary-v2-icon-circle-maroon">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M12 3l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4-3.9-3.8 5.4-.8zm-7 14.5l1.8-1.8m11.4-9.4l1.8-1.8M4.2 7.2l1.8 1.8m10.4 7.6l1.8 1.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                    <path d="M12 3l2.4 4.9 5.4.8-3.9 3.8.9 5.4-4.8-2.5-4.8 2.5.9-5.4-3.9-3.8 5.4-.8zm-7 14.5l1.8-1.8m11.4-9.4l1.8-1.8M4.2 7.2l1.8 1.8m10.4 7.6l1.8 1.8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                   </svg>
                 </div>
                 <h3 className="ony-summary-v2-main-title">Patient's Ony AI Summary</h3>
@@ -522,9 +522,9 @@ const FinalAgenda = () => {
                   <div className="ps-part3-block-header">
                     <div className="ps-part3-header-main">
                       <div className="ps-part3-icon-circle ps-part3-bg-maroon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.467 5.99 5.99 0 0 0-1.925-3.546 5.974 5.974 0 0 0-2.133-1A3.75 3.75 0 0 0 4.5 9a3.75 3.75 0 0 0 .545 1.956 5.973 5.973 0 0 0-.27 1.411 3.75 3.75 0 0 0 5.225 3.738A3.75 3.75 0 0 0 12 18Z" />
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 0 1-.495-7.467 5.99 5.99 0 0 1 1.925-3.546 5.974 5.974 0 0 1 2.133-1A3.75 3.75 0 0 1 19.5 9a3.75 3.75 0 0 1-.545 1.956 5.973 5.973 0 0 1 .27 1.411 3.75 3.75 0 0 1-5.225 3.738A3.75 3.75 0 0 1 12 18Z" />
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.467 5.99 5.99 0 0 0-1.925-3.546 5.974 5.974 0 0 0-2.133-1A3.75 3.75 0 0 0 4.5 9a3.75 3.75 0 0 0 .545 1.956 5.973 5.973 0 0 0-.27 1.411 3.75 3.75 0 0 0 5.225 3.738A3.75 3.75 0 0 0 12 18Z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 0 1-.495-7.467 5.99 5.99 0 0 1 1.925-3.546 5.974 5.974 0 0 1 2.133-1A3.75 3.75 0 0 1 19.5 9a3.75 3.75 0 0 1-.545 1.956 5.973 5.973 0 0 1 .27 1.411 3.75 3.75 0 0 1-5.225 3.738A3.75 3.75 0 0 1 12 18Z" />
                         </svg>
                       </div>
                       <span className="ps-part3-title">Parent Consent Required</span>
@@ -546,7 +546,7 @@ const FinalAgenda = () => {
                   <button className="ps-part3-action-btn">Send Parent Consent Form</button>
 
                   <div className="ps-part3-footer-info">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <circle cx="12" cy="12" r="10"></circle>
                       <line x1="12" y1="16" x2="12" y2="12"></line>
                       <line x1="12" y1="8" x2="12.01" y2="8"></line>
@@ -665,9 +665,9 @@ const FinalAgenda = () => {
                 <div className="ps-part4-block-header">
                   <div className="ps-part4-header-main">
                     <div className="ps-part4-icon-circle ps-part4-bg-maroon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.467 5.99 5.99 0 0 0-1.925-3.546 5.974 5.974 0 0 0-2.133-1A3.75 3.75 0 0 0 4.5 9a3.75 3.75 0 0 0 .545 1.956 5.973 5.973 0 0 0-.27 1.411 3.75 3.75 0 0 0 5.225 3.738A3.75 3.75 0 0 0 12 18Z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 0 1-.495-7.467 5.99 5.99 0 0 1 1.925-3.546 5.974 5.974 0 0 1 2.133-1A3.75 3.75 0 0 1 19.5 9a3.75 3.75 0 0 1-.545 1.956 5.973 5.973 0 0 1 .27 1.411 3.75 3.75 0 0 1-5.225 3.738A3.75 3.75 0 0 1 12 18Z" />
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.467 5.99 5.99 0 0 0-1.925-3.546 5.974 5.974 0 0 0-2.133-1A3.75 3.75 0 0 0 4.5 9a3.75 3.75 0 0 0 .545 1.956 5.973 5.973 0 0 0-.27 1.411 3.75 3.75 0 0 0 5.225 3.738A3.75 3.75 0 0 0 12 18Z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 0 1-.495-7.467 5.99 5.99 0 0 1 1.925-3.546 5.974 5.974 0 0 1 2.133-1A3.75 3.75 0 0 1 19.5 9a3.75 3.75 0 0 1-.545 1.956 5.973 5.973 0 0 1 .27 1.411 3.75 3.75 0 0 1-5.225 3.738A3.75 3.75 0 0 1 12 18Z" />
                       </svg>
                     </div>
                     <span className="ps-part4-title">Patient Reflection</span>
@@ -717,8 +717,8 @@ const FinalAgenda = () => {
 
                 <div className="pfd-card-header">
                   <div className="pfd-icon-circle">
-                    <svg className="pfd-icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
+                    <svg className="pfd-icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
                     </svg>
                   </div>
                   <h2 className="pfd-header-title">Payment & Financial Details</h2>

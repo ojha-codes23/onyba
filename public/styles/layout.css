@@ -1,12 +1,13 @@
 /* ==========================================================================
    GLOBAL VARIABLES & RESET
    ========================================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
+   @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 :root {
-  --gl-primary-color: linear-gradient(95.74deg,
-      #004c6c -19.77%,
-      #0094d2 119.43%);
+  --gl-primary-color: linear-gradient(
+    95.74deg,
+    #004c6c -19.77%,
+    #0094d2 119.43%
+  );
   --gl-bg-body: #f4f7f9;
   --gl-sidebar-width: 270px;
   --gl-sidebar-collapsed-width: 80px;
@@ -107,19 +108,16 @@ ul.gl-sidebar-menu li.gl-menu-item .gl-menu-link:hover span.gl-menu-text {
   display: block;
   padding-left: 12px;
 }
-
 ul.gl-sidebar-menu li.gl-menu-item.active span.gl-menu-text {
   color: #fff;
   font-size: 14px;
   font-weight: 500;
 }
-
 ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
   color: #000000;
   font-size: 14px;
   font-weight: 500;
 }
-
 .gl-sidebar-menu {
   list-style: none;
 }
@@ -158,19 +156,16 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
   object-fit: contain;
   transition: filter 0.2s;
 }
-
 .gl-menu-link:hover .gl-menu-text,
 .gl-menu-item:hover .gl-menu-text {
   color: #fff;
 }
-
 .inner-flag-drop-down span {
-  margin: 0 10px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #646464;
+    margin: 0 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #646464;
 }
-
 /* ==========================================================================
    RIGHT CONTENT MAIN WRAPPER & HEADER
    ========================================================================== */
@@ -194,20 +189,17 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
   padding: 0 30px;
   position: sticky;
   top: 0;
-  /* z-index: 99999; */
+  /* z-index: 9999; */
 }
-
 .header-left-part p.header-left-text {
-  font-size: 16px;
-  font-weight: 400;
-  color: #858484;
-  margin-bottom: 0;
+    font-size: 16px;
+    font-weight: 400;
+    color: #858484;
+    margin-bottom: 0 ;
 }
-
 .header-left-part {
-  margin-left: -25px;
+    margin-left: -25px;
 }
-
 .gl-header-left {
   display: flex;
   align-items: center;
@@ -219,7 +211,7 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
   background: transparent;
   border-radius: 50%;
   position: relative;
-
+  
 }
 
 /* .gl-sidebar-toggle:hover {
@@ -227,11 +219,11 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
 } */
 
 .gl-sidebar-toggle img {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  left: -45px;
-  top: -10px;
+      width: 24px;
+    height: 24px;
+    position: absolute;
+    left: -45px;
+    top: -10px;
 }
 
 .gl-header-panel-title {
@@ -297,22 +289,19 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
   background: transparent;
   border: none;
 }
-
 .gl-user-avatar-block p {
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: 0;
-  color: #1A1A1A;
-  text-align: left;
-  margin: 0px 10px;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 0;
+    color: #1A1A1A;
+    text-align: left;
+    margin: 0px 10px;
 }
-
-.gl-user-avatar-block p span {
-  color: #1A1A1AB2;
-  font-size: 12px;
-  font-weight: 600;
+.gl-user-avatar-block p span{
+    color: #1A1A1AB2;
+    font-size: 12px;
+    font-weight: 600;
 }
-
 .gl-user-avatar {
   width: 48px;
   height: 50px;
@@ -321,34 +310,28 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
   cursor: pointer;
   border: 2px solid var(--gl-border-light);
 }
-
 .gl-user-avatar-block img.gl-user-down-icon {
   margin-left: 15px;
   margin-right: 5px;
 }
-
 .gl-content-body {
   padding: 30px;
   width: 100%;
   background-color: #f3f4ef;
 }
-
 .gl-action-item img.gl-flag-icon {
   height: 40px;
   width: 40px;
 }
-
 /* ==========================================================================
    MINI SIDEBAR COMPRESSED STATE STYLES (Triggers via Toggle Class)
    ========================================================================== */
 .gl-dashboard-layout.mini-sidebar .gl-sidebar {
   width: var(--gl-sidebar-collapsed-width);
 }
-
 .gl-navigation-wrapper ul.gl-sidebar-menu {
   padding-left: 0;
 }
-
 .gl-dashboard-layout.mini-sidebar .gl-brand-block {
   justify-content: center;
   padding: 0;
@@ -382,25 +365,20 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
   .gl-sidebar {
     transform: translateX(-100%);
   }
-
   .gl-main-content-wrapper {
     width: 100% !important;
     margin-left: 0 !important;
   }
-
   .gl-dashboard-layout.mini-sidebar .gl-sidebar {
     transform: translateX(0);
     width: var(--gl-sidebar-width);
   }
-
   .gl-dashboard-layout.mini-sidebar .gl-logo-full {
     display: block !important;
   }
-
   .gl-dashboard-layout.mini-sidebar .gl-logo-collapsed {
     display: none !important;
   }
-
   .gl-dashboard-layout.mini-sidebar .gl-nav-section-title,
   .gl-dashboard-layout.mini-sidebar .gl-menu-text {
     display: block !important;
@@ -572,7 +550,6 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
    ========================================================================== */
 
 @media (min-width: 768px) {
-
   /* 1. DEFAULT STATE: Jab Sidebar OPEN ho (Full Width 270px) */
   .gl-sidebar {
     /* width: var(--gl-sidebar-width) !important; */
@@ -613,7 +590,6 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
     justify-content: center;
     padding: 0;
   }
-
   /* .gl-dashboard-layout.mini-sidebar .gl-logo-full,
   .gl-dashboard-layout.mini-sidebar .gl-nav-section-title,
   .gl-dashboard-layout.mini-sidebar .gl-menu-text,
@@ -623,7 +599,6 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
   .gl-dashboard-layout.mini-sidebar .gl-logo-collapsed {
     display: block !important;
   }
-
   .gl-dashboard-layout.mini-sidebar .gl-menu-link {
     justify-content: center;
     padding: 12px 0;
@@ -642,17 +617,14 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
     box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
     transition: transform var(--gl-transition-speed) ease;
   }
-
   .gl-main-content-wrapper,
   .gl-header {
     width: 100% !important;
     margin-left: 0 !important;
   }
-
   .gl-dashboard-layout.mobile-sidebar-open .gl-sidebar {
     transform: translateX(0);
   }
-
   .gl-header-search-box {
     display: none !important;
   }
@@ -677,8 +649,7 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   border: 1px solid #f1f5f9;
   z-index: 1050;
-  display: none;
-  /* Hidden by default */
+  display: none; /* Hidden by default */
   flex-direction: column;
   text-align: left;
   cursor: default;
@@ -696,7 +667,6 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
     opacity: 0;
     transform: translateY(-8px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
@@ -708,7 +678,6 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
   padding: 16px 20px;
   border-bottom: 1px solid #f1f5f9;
 }
-
 .gl-nt-header h3 {
   margin: 0;
   font-size: 16px;
@@ -733,11 +702,9 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
   border-radius: 8px;
   transition: background-color 0.15s ease;
 }
-
 .gl-nt-item:last-child {
   border-bottom: none;
 }
-
 .gl-nt-item:hover {
   background-color: #f8fafc;
 }
@@ -749,7 +716,6 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
   align-items: center;
   width: 100%;
 }
-
 .gl-nt-title-group {
   display: flex;
   align-items: center;
@@ -760,8 +726,7 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
 .gl-nt-dot {
   width: 8px;
   height: 8px;
-  background-color: #026aa2;
-  /* Clean brand blue */
+  background-color: #026aa2; /* Clean brand blue */
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -772,13 +737,11 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
   font-weight: 600;
   color: #0f172a;
 }
-
 .gl-nt-time {
   font-size: 11px;
   color: #94a3b8;
   white-space: nowrap;
 }
-
 .gl-nt-desc {
   margin: 0;
   font-size: 13px;
@@ -799,7 +762,6 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
   border: none;
   margin-top: 4px;
 }
-
 .gl-nt-read-card:hover {
   background-color: #e4e4e7;
 }
@@ -812,7 +774,6 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
   justify-content: flex-end;
   background-color: #ffffff;
 }
-
 .gl-nt-view-all-link {
   font-size: 13px;
   font-weight: 600;
@@ -822,78 +783,73 @@ ul.gl-sidebar-menu li.gl-menu-item span.gl-menu-text {
   align-items: center;
   gap: 6px;
 }
-
 .gl-nt-view-all-link:hover {
   color: #026aa2;
 }
-
 .gl-nt-view-all-link i {
   font-size: 11px;
 }
 
 
 .instruction {
-  color: #6b7280;
-  font-size: 1.2rem;
-  pointer-events: none;
+    color: #6b7280;
+    font-size: 1.2rem;
+    pointer-events: none;
 }
 
 /* Context Menu Styling */
 .context-menu {
-  position: absolute;
-  background: #ffffff;
-  border-radius: 16px;
-  /* Rounded corners jaisa image me hai */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
-  padding: 8px;
-  width: 150px;
-  display: none;
-  /* By default hidden rahega */
-  z-index: 1000;
-  animation: fadeIn 0.15s ease-out;
+    position: absolute;
+    background: #ffffff;
+    border-radius: 16px; /* Rounded corners jaisa image me hai */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+    padding: 8px;
+    width: 150px;
+    display: none; /* By default hidden rahega */
+    z-index: 1000;
+    animation: fadeIn 0.15s ease-out;
 }
 
 /* Menu Items Styling */
 .menu-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  cursor: pointer;
-  border-radius: 10px;
-  color: #111827;
-  font-size: 15px;
-  font-weight: 500;
-  transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    cursor: pointer;
+    border-radius: 10px;
+    color: #111827;
+    font-size: 15px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
 }
 
 /* Hover Effect */
 .menu-item:hover {
-  background-color: #f3f4f6;
+    background-color: #f3f4f6;
 }
 
 /* Icons Styling */
 .icon {
-  font-size: 18px;
-  color: #1f2937;
+    font-size: 18px;
+    color: #1f2937;
 }
 
 /* Divider Line */
 .divider {
-  border: none;
-  border-top: 1px solid #e5e7eb;
-  margin: 6px 4px;
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 6px 4px;
 }
 
 /* Smooth Open Animation */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
