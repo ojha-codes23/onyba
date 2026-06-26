@@ -130,7 +130,7 @@ const PersonalProfile = () => {
             }),
             slots,
         };
-    
+
         console.log("Availability Data:", availabilityData);
         toast.success("Availability saved successfully!");
     };
@@ -212,7 +212,7 @@ const PersonalProfile = () => {
                                         <select>
                                             {profileData.city.map((item, index) => (
 
-                                                <option>{item}</option>
+                                                <option key={index}>{item}</option>
                                             ))}
                                         </select>
                                     </div>
@@ -230,7 +230,7 @@ const PersonalProfile = () => {
                                         <select>
                                             {profileData.province.map((item, index) => (
 
-                                                <option>{item}</option>
+                                                <option key={index}>{item}</option>
                                             ))}
                                         </select>
                                     </div>
@@ -241,7 +241,7 @@ const PersonalProfile = () => {
                                         <select>
                                             {profileData.country.map((item, index) => (
 
-                                                <option>{item}</option>
+                                                <option key={index}>{item}</option>
                                             ))}
                                         </select>
                                     </div>
@@ -307,7 +307,7 @@ const PersonalProfile = () => {
                             <p className="onyba-prof-sub-title-text">Select session mode</p>
                             <div className="onyba-prof-mode-toggle-row">
                                 <button className="onyba-prof-btn-mode onyba-prof-btn-mode--active"><img src="images/online-icon.svg" alt="" />Online</button>
-                                <button className="onyba-prof-btn-mode onyba-prof-btn-mode--inactive"><img src="images/hugeicons_location-05.svg" alt="" /> In-Person</button>
+                                <button className="onyba-prof-btn-mode onyba-prof-btn-mode "><img src="images/hugeicons_location-05.svg" alt="" /> In-Person</button>
                             </div>
 
                             <p className="onyba-prof-sub-title-text">Clinic Address</p>
