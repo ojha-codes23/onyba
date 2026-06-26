@@ -313,12 +313,26 @@ const PersonalProfile = () => {
                                 <button className="onyba-prof-btn-action" onClick={() => setSelectSession(!selectSession)}>Add</button>
                             </div>
 
-                            <p className="onyba-prof-sub-title-text">Select session mode</p>
-                            <div className="onyba-prof-mode-toggle-row">
-                                <button className="onyba-prof-btn-mode onyba-prof-btn-mode--active"><img src="images/online-icon.svg" alt="" />Online</button>
-                                <button className="onyba-prof-btn-mode onyba-prof-btn-mode--inactive"><img src="images/hugeicons_location-05.svg" alt="" /> In-Person</button>
-                            </div>
-
+                            {selectSession && (
+                                <>
+                                    <p className="onyba-prof-sub-title-text">Select session mode</p>
+                                    <div className="onyba-prof-mode-toggle-row">
+                                        <button className={`onyba-prof-btn-mode ${selectedModes.includes("Online")
+                                                ? "onyba-prof-btn-mode--active"
+                                                : "onyba-prof-btn-mode--inactive"
+                                            }`}
+                                            onClick={() => handleModeToggle("Online")}>
+                                            <img src="images/online-icon.svg" alt="" />Online</button>
+                                        <button className={`onyba-prof-btn-mode ${selectedModes.includes("In-Person")
+                                            ? "onyba-prof-btn-mode--active"
+                                            : "onyba-prof-btn-mode--inactive"
+                                            }`}
+                                            onClick={() => handleModeToggle("In-Person")}>
+                                            <img src="images/hugeicons_location-05.svg" alt="" /> In-Person</button>
+                                    </div>
+                                </>
+                            )
+                            }
                             <p className="onyba-prof-sub-title-text">Clinic Address</p>
                             <div className="onyba-prof-address-card">
                                 <span className="onyba-prof-pin"><img src="images/location-profile-icon.svg" alt="" /></span>
