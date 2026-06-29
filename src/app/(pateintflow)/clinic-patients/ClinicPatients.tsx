@@ -11,8 +11,8 @@ const ClinicPatients = () => {
 
     const [search, searchPatients] = useState<string>("");
     const [statusFilter, setStatusFilter] = useState<string>("All");
-    const [currentPage, setCurrentPage] = useState<Number>(1);
-    const [itemsPerPage, setItemsPerPage] = useState<Number>(5);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [itemsPerPage, setItemsPerPage] = useState<number>(5);
 
     const filterPatients = clinicPatients.filter((patient) => {
         const matchesSearch = patient.name.toLowerCase().includes(search.toLocaleLowerCase());
