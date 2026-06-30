@@ -14,6 +14,13 @@ const PersonalProfile = () => {
 
     const [profileImage, setProfileImage] = useState("/images/user-personal-profile.svg");
 
+    const [saveForDate, setSaveForDate] = useState(false);
+    const [saveForDay, setSaveForDay] = useState(false);
+
+    const cityOptions = ["New York", "Canada", "Australia"];
+    const provinceOptions = ["New York", "Canada", "Australia"];
+    const countryOptions = ["United States", "Canada", "Australia"];
+
     const [profileData, setProfileData] = useState({
         fullName: "Dr. Sarah Johnson",
         surname1: "Rodríguez",
@@ -22,10 +29,10 @@ const PersonalProfile = () => {
         email: "sarah@gmail.com",
         vatNumber: "US12345678",
         streetAddress: "350 Fifth Avenue, Suite 900",
-        city: ["New York", "Canada", "Australia"],
+        city: "New York",
         postalCode: "10118",
-        province: ["New York", "Canada", "Australia"],
-        country: ["United States", "Canada", "Australia"],
+        province: "Canada",
+        country: "United States",
         experience: "10",
         bio: `I'm a clinical psychologist with 10 years of experience helping adults navigate anxiety, trauma, and relational challenges. My approach blends evidence-based modalities — CBT, EMDR, ACT — with a deeply human, collaborative stance. I believe therapy works best when it feels honest, warm, and a little brave.`,
     });
@@ -77,7 +84,7 @@ const PersonalProfile = () => {
         setIsEditing(!isEditing);
     };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setProfileData({
             ...profileData,
             [e.target.name]: e.target.value,
@@ -186,11 +193,11 @@ const PersonalProfile = () => {
                                 </div>
                                 <div className="onyba-prof-field-box onyba-prof-w-25">
                                     <label>Surname 1*</label>
-                                    <input type="text" value={profileData.surname1} disabled />
+                                    <input type="text" name="surname1" value={profileData.surname1} onChange={handleChange} disabled={!isEditing} />
                                 </div>
                                 <div className="onyba-prof-field-box onyba-prof-w-25">
                                     <label>Surname 2 (Optional)</label>
-                                    <input type="text" value={profileData.surname2} disabled />
+                                    <input type="text" name="surname2" value={profileData.surname2} onChange={handleChange} disabled={!isEditing} />
                                 </div>
                             </div>
 
@@ -205,30 +212,30 @@ const PersonalProfile = () => {
                                 </div>
                                 <div className="onyba-prof-field-box onyba-prof-w-33">
                                     <label>VAT Number*</label>
-                                    <input type="text" value={profileData.vatNumber} disabled />
+                                    <input type="text" name="vatNumber" value={profileData.vatNumber} onChange={handleChange} disabled={!isEditing} />
                                 </div>
                             </div>
 
                             <div className="onyba-prof-field-box onyba-prof-w-100">
                                 <label>Street-number-floor*</label>
-                                <input type="text" value={profileData.streetAddress} disabled />
+                                <input type="text" name="streetAddress" value={profileData.streetAddress} onChange={handleChange} disabled={!isEditing} />
                             </div>
 
                             <div className="onyba-prof-form-inline-row">
                                 <div className="onyba-prof-field-box onyba-prof-w-50">
                                     <label>City*</label>
                                     <div className="onyba-prof-select-custom">
-                                        <select>
-                                            {profileData.city.map((item, index) => (
+                                        <select name="city" value={profileData.city} onChange={handleChange} disabled={!isEditing}>
+                                            {cityOptions.map((item, index) => (
 
-                                                <option key={index}>{item}</option>
+                                                <option key={index} value={item}>{item}</option>
                                             ))}
                                         </select>
                                     </div>
                                 </div>
                                 <div className="onyba-prof-field-box onyba-prof-w-50">
                                     <label>Postal Code*</label>
-                                    <input type="text" value={profileData.postalCode} disabled />
+                                    <input type="text" name="postalCode" value={profileData.postalCode} onChange={handleChange} disabled={!isEditing} />
                                 </div>
                             </div>
 
@@ -236,10 +243,10 @@ const PersonalProfile = () => {
                                 <div className="onyba-prof-field-box onyba-prof-w-50">
                                     <label>Province*</label>
                                     <div className="onyba-prof-select-custom">
-                                        <select>
-                                            {profileData.province.map((item, index) => (
+                                        <select name="province" value={profileData.province} onChange={handleChange} disabled={!isEditing}>
+                                            {provinceOptions.map((item, index) => (
 
-                                                <option key={index}>{item}</option>
+                                                <option key={index} value={item}>{item}</option>
                                             ))}
                                         </select>
                                     </div>
@@ -247,10 +254,10 @@ const PersonalProfile = () => {
                                 <div className="onyba-prof-field-box onyba-prof-w-50">
                                     <label>Country*</label>
                                     <div className="onyba-prof-select-custom">
-                                        <select>
-                                            {profileData.country.map((item, index) => (
+                                        <select name="country" value={profileData.country} onChange={handleChange} disabled={!isEditing}>
+                                            {countryOptions.map((item, index) => (
 
-                                                <option key={index}>{item}</option>
+                                                <option key={index} value={item}>{item}</option>
                                             ))}
                                         </select>
                                     </div>
@@ -318,8 +325,8 @@ const PersonalProfile = () => {
                                     <p className="onyba-prof-sub-title-text">Select session mode</p>
                                     <div className="onyba-prof-mode-toggle-row">
                                         <button className={`onyba-prof-btn-mode ${selectedModes.includes("Online")
-                                                ? "onyba-prof-btn-mode--active"
-                                                : "onyba-prof-btn-mode--inactive"
+                                            ? "onyba-prof-btn-mode--active"
+                                            : "onyba-prof-btn-mode--inactive"
                                             }`}
                                             onClick={() => handleModeToggle("Online")}>
                                             <img src="images/online-icon.svg" alt="" />Online</button>
@@ -645,12 +652,14 @@ const PersonalProfile = () => {
                                             </select>
                                         </div>
 
-                                        <button
-                                            className="onyba-avail-btn-remove"
-                                            onClick={() => removeSlot(index)}
-                                        >
-                                            &times;
-                                        </button>
+                                        {index !== 0 && (
+                                            <button
+                                                className="onyba-avail-btn-remove"
+                                                onClick={() => removeSlot(index)}
+                                            >
+                                                &times;
+                                            </button>
+                                        )}
 
                                         {index === slots.length - 1 && (
                                             <button
@@ -666,14 +675,19 @@ const PersonalProfile = () => {
 
                             <div className="onyba-avail-footer-actions-row">
                                 {/* <button className="onyba-avail-btn-secondary">Save for May 6</button> */}
-                                <button className="onyba-avail-btn-secondary">
+                                <button className={saveForDate ? "onyba-avail-btn-maroon" : "onyba-avail-btn-secondary"} onClick={() => setSaveForDate(!saveForDate)}>
                                     Save for{" "}
                                     {selectedDate.toLocaleDateString("en-US", {
                                         month: "long",
                                         day: "numeric",
                                     })}
                                 </button>
-                                <button className="onyba-avail-btn-maroon">Save for all Saturdays</button>
+                                <button className={saveForDay ? "onyba-avail-btn-maroon" : "onyba-avail-btn-secondary"} onClick={() => setSaveForDay(!saveForDay)}>Save for all{" "}
+                                    {selectedDate.toLocaleDateString("en-US", {
+                                        weekday: "long",
+                                    })}
+
+                                </button>
                             </div>
 
                             <button className="onyba-avail-btn-block-submit" onClick={handleSaveAvailability}>Save Availability</button>

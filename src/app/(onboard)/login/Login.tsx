@@ -64,20 +64,63 @@ const Login = () => {
 
     const validation = () => {
         if (!value || value.trim() === "") {
-            setError("Email is required");
+            setError("Email or phone number is required");
             return false;
         }
 
+        const input = value.trim();
+
+        // const phoneRegex = /^[6-9]\d{9}$/;
+        const phoneRegex = /^\d{10}$/;
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (!emailRegex.test(value.trim())) {
-            setError("Please enter a valid email address");
+        // if (!emailRegex.test(value.trim())) {
+        //     setError("Please enter a valid email address");
+        //     return false;
+        // }
+
+        // console.log("Phone:", phoneRegex.test(input));
+        // console.log("Email:", emailRegex.test(input));
+
+        if (!phoneRegex.test(input) && !emailRegex.test(input)) {
+            setError("Please enter a valid email or phone number");
             return false;
         }
 
         setError("");
         return true;
     };
+
+    // const validation = () => {
+    //     const input = value.trim();
+    
+    //     if (!input) {
+    //         setError("Email or phone number is required");
+    //         return false;
+    //     }
+    
+    //     const phoneRegex = /^[6-9]\d{9}$/;
+    //     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+    //     // User is trying to enter an email
+    //     if (input.includes("@")) {
+    //         if (!emailRegex.test(input)) {
+    //             setError("Please enter a valid email address");
+    //             return false;
+    //         }
+    //     }
+    //     // User is trying to enter a phone number
+    //     else {
+    //         if (!phoneRegex.test(input)) {
+    //             setError("Please enter a valid 10-digit phone number");
+    //             return false;
+    //         }
+    //     }
+    
+    //     setError("");
+    //     return true;
+    // };
+
     const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!validation()) {

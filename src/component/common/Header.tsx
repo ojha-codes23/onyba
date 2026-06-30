@@ -1,4 +1,5 @@
 "use client"
+
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useState, useEffect, useRef } from 'react'
 import EndSession from '../meetingmodal/EndSession';
@@ -36,11 +37,37 @@ const notifications = [
     },
 ];
 
+const languages = [
+    {
+        id: 1,
+        name: "English",
+        flag: "/images/flags/uk.svg.webp",
+    },
+    {
+        id: 2,
+        name: "Español",
+        flag: "/images/flags/spain.svg.webp",
+    },
+    {
+        id: 3,
+        name: "Français",
+        flag: "/images/flags/france.svg.webp",
+    },
+    {
+        id: 4,
+        name: "Deutsch",
+        flag: "/images/flags/germany.svg.webp",
+    },
+];
+
+
 const Header = () => {
     const pathname = usePathname()
     const router = useRouter()
     const [isNotiOpen, setIsNotiOpen] = useState(false);
     const [activeTab, setActiveTab] = useState<"All" | "Unread">("All");
+    const [selectedLanguage, setSelectedLanguage] = useState(languages[0]);
+    const [isLanguageOpen, setIsLanguageOpen] = useState(false);
     const notiRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -128,12 +155,37 @@ const Header = () => {
                             </div>
                         </div>
 
-
-                        <button type="button" className="gl-action-item">
+                        <div className="gl-language-wrapper">
+                        <button type="button" className="gl-action-item" onClick={() => setIsLanguageOpen(!isLanguageOpen)}>
                             <div className="inner-flag-drop-down">
-                                <img src="/images/drop-down-header-flag.svg" alt="Language" className="gl-flag-icon" /><span>English</span> <img src="/images/drop-down-icon-flag.svg" alt="" />
+                                {/* <img src="/images/drop-down-header-flag.svg" alt="Language" className="gl-flag-icon" /> */}
+                                <img src={selectedLanguage.flag} alt="Language" className="gl-flag-icon" />
+                                <span>{selectedLanguage.name}</span> <img src="/images/drop-down-icon-flag.svg" alt="" />
                             </div>
                         </button>
+
+                        {isLanguageOpen && (
+                            <div className="gl-language-dropdown">
+                                {languages.map((language) => (
+                                    <div
+                                        key={language.id}
+                                        className="gl-language-item"
+                                        onClick={() => {
+                                            setSelectedLanguage(language);
+                                            setIsLanguageOpen(false);
+                                        }}
+                                    >
+                                        <img
+                                            src={language.flag}
+                                            alt={language.name}
+                                            className="gl-flag-icon"
+                                        />
+                                        <span>{language.name}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                        </div>
 
 
                         <button type="button" onClick={() => router.push("/personal-profile")} className="gl-user-avatar-block">
@@ -179,7 +231,7 @@ const Header = () => {
                             {/* <!-- Button 2: End Session (With Calendar Check Icon) --> */}
                             <button className="action-btn-base action-btn-outline" data-bs-toggle="modal" data-bs-target="#endSessionModal">
                                 <span className="action-btn-icon">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                                         <line x1="16" y1="2" x2="16" y2="6"></line>
                                         <line x1="8" y1="2" x2="8" y2="6"></line>
