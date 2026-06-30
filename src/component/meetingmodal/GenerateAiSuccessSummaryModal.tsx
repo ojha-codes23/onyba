@@ -17,7 +17,7 @@ const GenerateAiSuccessSummaryModal = () => {
 
                     <div className="modal-body onyba-end-body">
 
-                        <div className="onyba-complete-icon-circle">
+                        <div className="onyba-success-icon-circle">
                             <img src="images/success.svg" alt="End Call" />
                         </div>
 
