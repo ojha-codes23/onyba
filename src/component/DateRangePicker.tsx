@@ -77,6 +77,29 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
   ];
   const monthYearString = `${monthNames[month]} ${year}`;
 
+  // const handleDayClick = (day: number) => {
+  //   const selectedDate = new Date(year, month, day);
+
+  //   if (!startDate || (startDate && endDate)) {
+  //     // Start a new range
+  //     setStartDate(selectedDate);
+  //     setEndDate(null);
+  //     if (onChange) onChange({ startDate: selectedDate, endDate: null });
+  //   } else if (startDate && !endDate) {
+  //     // Complete the range
+  //     if (selectedDate < startDate) {
+  //       // If clicked date is before start date, swap them
+  //       setEndDate(startDate);
+  //       setStartDate(selectedDate);
+  //       if (onChange) onChange({ startDate: selectedDate, endDate: startDate });
+  //     } else {
+  //       setEndDate(selectedDate);
+  //       if (onChange) onChange({ startDate, endDate: selectedDate });
+  //     }
+  //     setIsOpen(false); // Optionally close on select
+  //   }
+  // };
+
   const handleDayClick = (day: number) => {
     const selectedDate = new Date(year, month, day);
 
@@ -84,20 +107,39 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
       // Start a new range
       setStartDate(selectedDate);
       setEndDate(null);
-      if (onChange) onChange({ startDate: selectedDate, endDate: null });
     } else if (startDate && !endDate) {
-      // Complete the range
+      // Finish the range
       if (selectedDate < startDate) {
-        // If clicked date is before start date, swap them
         setEndDate(startDate);
         setStartDate(selectedDate);
-        if (onChange) onChange({ startDate: selectedDate, endDate: startDate });
       } else {
         setEndDate(selectedDate);
-        if (onChange) onChange({ startDate, endDate: selectedDate });
       }
-      setIsOpen(false); // Optionally close on select
     }
+  };
+
+  const handleClear = () => {
+    setStartDate(null);
+    setEndDate(null);
+    setHoverDate(null);
+
+    onChange?.({
+      startDate: null,
+      endDate: null,
+    });
+
+    // setIsOpen(false);
+  };
+
+  const handleSubmit = () => {
+    if (!startDate || !endDate) return;
+
+    onChange?.({
+      startDate,
+      endDate,
+    });
+
+    setIsOpen(false);
   };
 
   const isDateInRange = (date: Date) => {
@@ -122,7 +164,7 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
     return `${date.getDate()} ${monthNames[date.getMonth()].substring(0, 3)} ${date.getFullYear()}`;
   };
 
-  const displayValue = startDate 
+  const displayValue = startDate
     ? `${formatDate(startDate)} - ${endDate ? formatDate(endDate) : '...'}`
     : placeholder;
 
@@ -207,20 +249,20 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
               {Array.from({ length: daysInMonth }).map((_, i) => {
                 const day = i + 1;
                 const currentCellDate = new Date(year, month, day);
-                
+
                 const isStart = isSameDate(startDate, currentCellDate);
                 const isEnd = isSameDate(endDate, currentCellDate);
                 const inRange = isDateInRange(currentCellDate);
-                
+
                 let className = 'agd-popup-day-cell agd-popup-day-clickable';
-                
+
                 if (isStart || isEnd) {
                   className += ' agd-popup-day-active';
                 }
 
                 // Add inline styling for dates within the range to match the active color but lighter
-                const rangeStyle: React.CSSProperties = (inRange && !isStart && !isEnd) 
-                  ? { backgroundColor: '#eef2ff', color: '#4f46e5', borderRadius: '4px' } 
+                const rangeStyle: React.CSSProperties = (inRange && !isStart && !isEnd)
+                  ? { backgroundColor: '#eef2ff', color: '#4f46e5', borderRadius: '4px' }
                   : {};
 
                 return (
@@ -241,8 +283,52 @@ const DateRangePicker: React.FC<DateRangePickerProps> = ({
               })}
             </div>
           </div>
+
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              gap: "10px",
+              marginTop: "16px",
+            }}
+          >
+            <button
+              type="button"
+              onClick={handleClear}
+              style={{
+                padding: "8px 18px",
+                border: "1px solid #d1d5db",
+                background: "#fff",
+                borderRadius: "6px",
+                cursor: "pointer",
+              }}
+            >
+              Clear
+            </button>
+
+            <button
+              type="button"
+              disabled={!startDate || !endDate}
+              onClick={handleSubmit}
+              style={{
+                padding: "8px 18px",
+                border: "none",
+                background: !startDate || !endDate ? "#bdbdbd" : "#4f46e5",
+                color: "#fff",
+                borderRadius: "6px",
+                cursor: !startDate || !endDate ? "not-allowed" : "pointer",
+              }}
+            >
+              Submit
+            </button>
+          </div>
         </div>
+
+
       )}
+
+
+
     </div>
   );
 };

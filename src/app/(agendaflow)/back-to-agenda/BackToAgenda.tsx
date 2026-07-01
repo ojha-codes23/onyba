@@ -19,9 +19,9 @@ const BackToAgenda = () => {
                         </Link>
                         <div className="patient-nav-container">
 
-                            <Link href="/video-confrence" className="patient-link-start-session">
+                            {/* <Link href="/video-confrence" className="patient-link-start-session">
                                 Start Session
-                            </Link>
+                            </Link> */}
 
                             <Link href="#" className="patient-link-back-to-patients" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                 <img src="images/reschedule.svg" alt="" />
